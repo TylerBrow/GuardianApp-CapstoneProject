@@ -14,7 +14,7 @@ export function getCoord() {
         
         store.dispatch({
             type: 'GET_COORD',
-            payload: resp.data[0]
+            payload: resp.data
         })
     })
 }

@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import {connect} from 'react-redux'
 import {getCoord} from '../actions/actions'
+
 const SampleMarker = ({text}) => <div>{text}</div>
- 
+
+
 class SimpleMap extends Component {
 
-    componentDidMount(){
+    // componentDidMount() {
+    //     getCoord()
+    // }
+
+    componentWillMount(){
         getCoord()  
+        console.log(this.props.coord)
     }
 
     static defaultProps = {
@@ -24,8 +31,8 @@ class SimpleMap extends Component {
           <div style={{ height: '500px', width: '500px' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
-              defaultCenter={this.props.center}
-              center={this.props.coord} 
+            //   defaultCenter={this.props.coord[this.props.coord.length - 1]}
+              center={this.props.coord[this.props.coord.length - 1]} 
               defaultZoom={this.props.zoom}
               zoom={15}
             >
@@ -42,8 +49,10 @@ class SimpleMap extends Component {
      
 
     function mapStatetoProps(appState) {
+        console.log(appState.center)
         return {
-            coord: appState.center
+            coord: appState.center,
+            
         }
     }
     export default connect(mapStatetoProps)(SimpleMap)

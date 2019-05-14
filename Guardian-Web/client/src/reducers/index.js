@@ -1,5 +1,5 @@
 const initialState = {
-  center:[]
+  center:[],
 }
 
 export default function (state = initialState, action) {
