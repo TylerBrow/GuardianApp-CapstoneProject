@@ -72,7 +72,7 @@ export default class HomeScreen extends React.Component {
           errorMessage: 'Permission to access location was denied',
         });
       }
-      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.High, timeInterval: 10000, distanceInterval: 1, showsBackgroundLocationIndicator: true})
+      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 10000, distanceInterval: 1, showsBackgroundLocationIndicator: true})
       console.log('enabled')
     }
 

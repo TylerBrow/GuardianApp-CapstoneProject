@@ -7,14 +7,28 @@ const SampleMarker = ({text}) => <div>{text}</div>
 
 
 class SimpleMap extends Component {
+  
+  // getCoords = () => {
+    
+  //   console.log(this.props.coord)
+  //   let center = this.props.coord[this.props.coord.length - 1]
+  //   //const lat = center.lat
+  //   console.log(center)
+  //     //console.log(lat)
+  // }
 
-    // componentDidMount() {
-    //     getCoord()
+    componentDidMount() {
+        
+    }
+
+    // componentDidUpdate(){
+    //   this.getCoords()
     // }
 
     componentWillMount(){
         getCoord()  
-        console.log(this.props.coord)
+        // console.log(this.props.coord)
+        // this.getCoords()
     }
 
     static defaultProps = {
@@ -32,14 +46,15 @@ class SimpleMap extends Component {
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
             //   defaultCenter={this.props.coord[this.props.coord.length - 1]}
-              center={this.props.coord[this.props.coord.length - 1]} 
+              center={this.props.center} 
               defaultZoom={this.props.zoom}
               zoom={15}
             >
               <SampleMarker
-                lat={this.props.coord.lat}
-                lng={this.props.coord.lng}
-                text="Grandpa"
+                lat={this.props.lat}
+                lng={this.props.lng}
+                // center={this.center}
+                text="G"
               />
             </GoogleMapReact>
           </div>
@@ -51,8 +66,11 @@ class SimpleMap extends Component {
     function mapStatetoProps(appState) {
         console.log(appState.center)
         return {
-            coord: appState.center,
-            
+            center: appState.center,
+            lat: Number(appState.lat),
+            lng: Number(appState.lng)
         }
     }
     export default connect(mapStatetoProps)(SimpleMap)
+
+    // 202	36.1586439	-115.1523737	NULL	1557865422997.7498
