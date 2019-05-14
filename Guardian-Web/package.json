@@ -6,7 +6,8 @@
   "scripts": {
     "client": "cd client && npm start",
     "server": "cd server && npm start",
-    "start": "concurrently \"npm run client\" \"npm run server\""
+    "mobile": "cd guardian-mobile && npm start",
+    "start": "concurrently \"npm run mobile\" \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

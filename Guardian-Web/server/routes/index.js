@@ -8,7 +8,7 @@ router.post('/notifications', (req, res, next) => {
   pool.query(sql, [req.body.message, req.body.date, req.body.day], (err, results, fields) => {
     
     res.json({
-      id: results.insertID,
+      id: results.insertId,
       message: req.body.message,
       date: req.body.date,
       day: req.body.day
@@ -25,18 +25,22 @@ router.get('/notifications', (req, res, next) => {
 })
 
 router.post('/maps', (req, res, next) => {
-  const sql= 'INSERT INTO maps (lat, long) VALUES (?, ?)'
+  const time = req.body.time
+  const lat = req.body.lat
+  const longitude = req.body.longitude
+  const sql= `INSERT INTO maps (lat, lng, time) VALUES (?, ?, ?)`
 
-  pool.query(sql, [req.body.lat, req.body.long], (err, results, fields) => {
+  pool.query(sql, [lat, longitude, time], (err, results, fields) => {
     res.json({
-      lat: req.body.lat,
-      long: req.body.long
+      lat: lat, 
+      longitude: longitude, 
+      time:time
     })
   })
 })
 
 router.get('/maps', (req, res, next) => {
-  const sql = 'SELECT m.lat, m.long FROM maps m'
+  const sql = 'SELECT m.lat, m.longitude FROM maps m'
 
   pool.query(sql, (err, results, fields) => {
     res.json(results)
