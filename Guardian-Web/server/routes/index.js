@@ -3,15 +3,16 @@ var router = express.Router();
 var pool=require('../db')
 
 router.post('/notifications', (req, res, next) => {
-  const sql = 'INSERT INTO notifications (message, date, day) VALUES (?, ?, ?)'
+  const sql = 'INSERT INTO notifications (message, date, day, time) VALUES (?, ?, ?, ?)'
 
-  pool.query(sql, [req.body.message, req.body.date, req.body.day], (err, results, fields) => {
+  pool.query(sql, [req.body.message, req.body.date, req.body.day, req.body.time], (err, results, fields) => {
     
     res.json({
       id: results.insertId,
       message: req.body.message,
       date: req.body.date,
-      day: req.body.day
+      day: req.body.day,
+      time: req.body.time
     })
   })
 })
@@ -40,7 +41,7 @@ router.post('/maps', (req, res, next) => {
 })
 
 router.get('/maps', (req, res, next) => {
-  const sql = 'SELECT m.lat, m.longitude FROM maps m'
+  const sql = 'SELECT m.lat, m.lng FROM maps m'
 
   pool.query(sql, (err, results, fields) => {
     res.json(results)
@@ -50,6 +51,7 @@ router.get('/maps', (req, res, next) => {
 module.exports = router;
 
 // var checkNotifications = setInterval(getNotifications, 10000)
+
 // export function getNotifications(date) {
 // axios.get(http://localhost:3001/api/notifications).then(resp => {
 //   if (resp.data[0].date == date) {
