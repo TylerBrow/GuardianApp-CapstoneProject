@@ -5,9 +5,11 @@ import { ListItem, Header, Icon } from 'react-native-elements'
 
 import { Notifications } from 'expo';
 
-import { BackgroundFetch } from 'expo';
+import { BackgroundFetch, Font } from 'expo';
 
 import { Constants, Location, Permissions, TaskManager, LinearGradient } from 'expo';
+
+import { connect } from 'react-redux'
 
 import {
   Image,
@@ -18,13 +20,14 @@ import {
   TouchableOpacity,
   View,
   Button,
-  SafeAreaView
+  SafeAreaView,
+  SectionList
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+ class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -51,7 +54,6 @@ export default class HomeScreen extends React.Component {
         }
       })
     })
-
   }
 
     componentDidMount() {
@@ -60,8 +62,6 @@ export default class HomeScreen extends React.Component {
       this.sendNotification()
 
       getNotifications()
-
-      // this._getNotificationAsync()
       
     }
 
@@ -72,22 +72,9 @@ export default class HomeScreen extends React.Component {
           errorMessage: 'Permission to access location was denied',
         });
       }
-      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 10000, distanceInterval: 1, showsBackgroundLocationIndicator: true})
+      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 30000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
       console.log('enabled')
     }
-
-    _getNotificationAsync =  async () => {
-      // BackgroundFetch.registerTaskAsync('notifications') 
-      // BackgroundFetch.setMinimumIntervalAsync(30)
-    }
-    //   , () => {
-    //     console.log('background')
-    //     getNotifications()
-    //     // BackgroundFetch.setMinimumIntervalAsync(30, () => {
-    //     //   console.log('background fetch')
-    //     // })
-    //   })
-    // }
 
   render() {
     return (
@@ -95,7 +82,7 @@ export default class HomeScreen extends React.Component {
         <ScrollView style={styles.viewContainer}>
       {/* you add the className as a prop example above */}
           <Header
-            leftComponent={{text: 'GUARDIAN', style:{color: 'rgba(115, 57, 244, .6)', fontSize: 25, marginLeft: 10}}}
+            leftComponent={{text: 'Guardian', style:{color: 'rgba(115, 57, 244, .7)', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
             leftContainerStyle={{flex: 3}}
             backgroundColor={ '#fff'}
             containerStyle={{ borderBottomColor: '#fff'}}
@@ -136,10 +123,13 @@ export default class HomeScreen extends React.Component {
               titleStyle={{fontSize: 28, fontWeight: '900', color:"#fc7b9b"}}
               subtitle="May 11, 2019 10:00 AM"
               subtitleStyle={{fontSize: 20}}
-            /> 
+            />  
+              {
+                this.props.notifications.map((item, i) => (
             <ListItem 
+              key = {"key-"+ i}
               style={styles.listItem}
-              key="item-2"
+              // key="item-2"
               leftIcon={
               <Icon 
                 name="stethoscope"
@@ -147,11 +137,13 @@ export default class HomeScreen extends React.Component {
                 color="#fc7b9b"
                 size= {55}
                 />}
-              title="Take Pill"
+              title= {item.message}
               titleStyle={{fontSize: 27, fontWeight: '900', color:"#fc7b9b"}}
-              subtitle="May 20, 2019 12:00 PM"
+              subtitle={`${item.date} ${item.day}`}
               subtitleStyle={{fontSize: 20}}
             /> 
+            ))
+            }
             <ListItem 
               style={styles.listItem}
               key="item-3"
@@ -206,6 +198,15 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+function mapStateToProps(appState) {
+  console.log(appState)
+  return {
+    notifications: appState.notifications
+  }
+}
+
+export default connect(mapStateToProps)(HomeScreen)
+
 TaskManager.defineTask('currentLoc', ({ data, error }) => {
   if (error) {
     console.log("Error!", error.message)
@@ -214,22 +215,11 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
   }
   if (data){
     const { locations } = data;
-    // console.log('locations', locations)
     getUserLocation(locations)
+    getNotifications()
   }
   // console.log(location)
 })
-
-// TaskManager.defineTask('notifications', () => {
-//   try {
-//     console.log('background')
-//     // const receivedNewData = data
-//     // return receivedNewData ? BackgroundFetch.Result.NewData : BackgroundFetch.Result.NoData;
-//   } catch (error) {
-//     return BackgroundFetch.Result.Failed;
-//   }
-// })
-
 
 const styles = StyleSheet.create({
   container: {
@@ -262,8 +252,8 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
-
-
 // rgb(246,247,249)
+
+// borderBottomWidth: 3,
+// borderBottomLeftRadius: 29,
+// borderBottomRightRadius: 29, borderBottomColor: 'lightblue', borderWidth: 0.5, borderRightColor: 'transparent', borderLeftColor: 'transparent', borderTopColor: 'transparent'
