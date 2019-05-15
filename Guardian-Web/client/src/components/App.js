@@ -11,6 +11,7 @@ import "bulma-start/css/main.css"
 import "bulma-start/_javascript/main.js"
 import "./logo/Logo.css"
 import Logo from "./logo/Logo"
+import Test from '../components/actiontest'
 
 
 
@@ -29,6 +30,7 @@ const App = props => {
             <Route path="/register" component={Register} />
             <Route path="/addnotifications" component={AddNotifications} />
             <Route exact path="/" component={Main}/>
+            <Route path="/home" component={Test}/>
 
             {/* private routes */}
             {/* <AuthRoute path="/" exact component={Main} /> */}
