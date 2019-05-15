@@ -1,22 +1,44 @@
-import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import store from '../store'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import React from "react"
+import { Provider } from "react-redux"
+import store from "../store"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import Main from "./main/Main"
+import { AuthProvider, AuthRoute } from "../lib/auth"
+import Login from "./auth/Login"
+import Register from "./auth/Register"
+import AddNotifications from './addNotifications/AddNotifications';
+import "bulma-start/css/main.css"
+import "bulma-start/_javascript/main.js"
+import "./logo/Logo.css"
+import Logo from "./logo/Logo"
+import Test from '../components/actiontest'
 
-import Test from './actiontest'
 
 
-class App extends Component {
-  render() {
-    return (
+
+const App = props => {
+  return (
+    <AuthProvider>
       <Provider store={store}>
         <Router>
-          <Route path='/' component={Test} />
-        <h1>Hello World</h1>
+          <div>
+          <div className="logo">
+                    <Logo />
+          </div>  
+            {/* public routes */}
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/addnotifications" component={AddNotifications} />
+            <Route exact path="/" component={Main}/>
+            <Route path="/home" component={Test}/>
+
+            {/* private routes */}
+            {/* <AuthRoute path="/" exact component={Main} /> */}
+          </div>
         </Router>
       </Provider>
-    )
-  }
+    </AuthProvider>
+  )
 }
 
 export default App
