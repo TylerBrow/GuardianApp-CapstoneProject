@@ -37,8 +37,8 @@ import { MonoText } from '../components/StyledText';
   }
 
   sendNotification = async () => {
-    Notifications.presentLocalNotificationAsync({title:'message', body:'hi'})
-    // Notifications.scheduleLocalNotificationAsync({title:'message', body:'hi-scheduled'}, {time: (new Date()).getTime() + 1000})
+    // Notifications.presentLocalNotificationAsync({title:'message', body:'hi'})
+    Notifications.scheduleLocalNotificationAsync({title:'message', body:'hi-scheduled'}, {time: (new Date()).getTime() + 1000})
 
   }
  
@@ -51,10 +51,10 @@ import { MonoText } from '../components/StyledText';
           longitude: position.coords.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }
+          }
+        })
       })
-    })
-  }
+    }
 
     componentDidMount() {
       this._getLocationAsync();
