@@ -1,4 +1,4 @@
-import React, { Link } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import './Navbar.css';
+
+import { Link } from 'react-router-dom'
 // import Button from '@material-ui/core/Button';
 // import purple from '@material-ui/core/colors/purple';
 // import green from '@material-ui/core/colors/green';
@@ -76,6 +78,11 @@ class Navbar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleSignout = (e) => {
+    window.localStorage.removeItem("authtoken")
+    console.log(window.localStorage)
+  }
+
 
   render() {
     const { anchorEl } = this.state;
@@ -111,6 +118,7 @@ class Navbar extends React.Component {
           <MenuItem className={this.props.classes.location} onClick={this.handleLink}>Location Check Points</MenuItem>
           <MenuItem className={this.props.classes.nearest} onClick={this.handleLink}>Nearest Emergency Services</MenuItem>
           <MenuItem className={this.props.classes.tips} onClick={this.handleLink}>Alzheimer's Tips &amp; Advice</MenuItem>
+          <Link to='/login'><MenuItem className={this.props.classes.tips} onClick={this.handleSignout}>Logout</MenuItem></Link>
         </Menu>
       </div>
     );

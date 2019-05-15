@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store';
 
 
 export function getUserLocation(location){
@@ -15,6 +16,9 @@ export function getUserLocation(location){
 
 export function getNotifications(){
   axios.get('http://10.68.0.119:3001/api/notifications').then(resp => {
-    console.log(resp.data)
+    store.dispatch({
+      type: 'GET_NOTI',
+      payload: resp.data
+    })
   })
 }

@@ -7,12 +7,13 @@ const config = require("config")
 
 
 router.post("/register", (req, res, next) => {
+  console.log(req.body)
  const username = req.body.username
  const password = sha512(req.body.password + config.get("salt"))
 
  const checksql = "SELECT count(1) as count from users WHERE username = ?"
 
- conn.query(checksql, [username], (err, results, fields) => {
+ pool.query(checksql, [username], (err, results, fields) => {
    const count = results[0].count
 
    if (count > 0) {
@@ -20,9 +21,11 @@ router.post("/register", (req, res, next) => {
        error: "Username already taken"
      })
    } else {
+     const userId = 'guardian' + username
      const sql = "INSERT INTO users (username, password) VALUES (?, ?)"
 
-     conn.query(sql, [username, password], (err, results, fields) => {
+     pool.query(sql, [username, password], (err, results, fields) => {
+       console.log(err)
        if (err) {
          throw new Error("register failed")
        } else {
@@ -43,7 +46,7 @@ router.post("/login", (req, res, next) => {
  const sql =
    "SELECT count(1) as count FROM users WHERE username = ? AND password = ?"
 
- conn.query(sql, [username, password], (err, results, fields) => {
+ pool.query(sql, [username, password], (err, results, fields) => {
    const count = results[0].count
 
    if (count >= 1) {
