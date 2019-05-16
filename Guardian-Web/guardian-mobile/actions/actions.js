@@ -1,5 +1,8 @@
 import axios from 'axios'
 import store from '../store';
+import moment from 'moment'
+
+import { Notifications, Permissions } from 'expo'
 
 
 export function getUserLocation(location){
@@ -21,4 +24,17 @@ export function getNotifications(){
       payload: resp.data
     })
   })
+}
+
+export function getNotificationsBack(){
+  axios.get('http://10.68.0.119:3001/api/notifications').then(resp => {
+    const filterData = resp.data.filter((item) => {
+      console.log(moment(item.date, moment.ISO_8601))
+      console.log(moment())
+          return moment(item.date, moment.ISO_8601) >= moment()?  Notifications.scheduleLocalNotificationAsync({title:'reminder', body:`${item.message}`}, {time:(new Date()).getTime() + 10000}): ''
+        })
+        console.log('filter', filterData)
+        console.log('current day', moment(new Date().getTime()).format('dddd'))
+  })
+
 }

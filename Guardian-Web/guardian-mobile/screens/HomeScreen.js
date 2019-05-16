@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserLocation, getNotifications } from '../actions/actions'
+import { getUserLocation, getNotifications, getNotificationsBack } from '../actions/actions'
 
 import { ListItem, Header, Icon } from 'react-native-elements'
 
@@ -10,6 +10,8 @@ import { BackgroundFetch, Font } from 'expo';
 import { Constants, Location, Permissions, TaskManager, LinearGradient } from 'expo';
 
 import { connect } from 'react-redux'
+
+import moment from 'moment'
 
 import {
   Image,
@@ -38,7 +40,7 @@ import { MonoText } from '../components/StyledText';
 
   sendNotification = async () => {
     // Notifications.presentLocalNotificationAsync({title:'message', body:'hi'})
-    Notifications.scheduleLocalNotificationAsync({title:'message', body:'hi-scheduled'}, {time: (new Date()).getTime() + 1000})
+    // Notifications.scheduleLocalNotificationAsync({title:'message', body:'hi-scheduled'}, {time: (new Date()).getTime() + 1000})
 
   }
  
@@ -57,11 +59,13 @@ import { MonoText } from '../components/StyledText';
     }
 
     componentDidMount() {
-      this._getLocationAsync();
+      this._getLocationAsync()
 
-      this.sendNotification()
+      // this.sendNotification()
 
       getNotifications()
+
+      getNotificationsBack()
       
     }
 
@@ -74,6 +78,19 @@ import { MonoText } from '../components/StyledText';
       }
       await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 30000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
       console.log('enabled')
+
+      const { status: existingStatus } = await Permissions.getAsync(
+          Permissions.NOTIFICATIONS
+        );
+        let finalStatus = existingStatus;
+      
+        if (existingStatus !== 'granted') {
+          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+          finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+          return;
+        }
     }
 
   render() {
@@ -217,8 +234,9 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
     const { locations } = data;
     getUserLocation(locations)
     getNotifications()
+
+    getNotificationsBack()
   }
-  // console.log(location)
 })
 
 const styles = StyleSheet.create({
