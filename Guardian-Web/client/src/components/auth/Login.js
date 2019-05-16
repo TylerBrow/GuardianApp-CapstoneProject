@@ -26,6 +26,7 @@ const Login = props => {
     signin(username, password)
       .then(() => {
         props.history.push("/")
+        console.log(window.localStorage)
       })
       .catch(err => {
         setError(true)
