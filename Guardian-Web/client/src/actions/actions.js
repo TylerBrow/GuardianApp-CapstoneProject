@@ -3,9 +3,9 @@ import axios from 'axios'
 
 
 
-export function setNotification(message, date, day, time) {
+export function setNotification(category, message, time) {
     
-    axios.post('/api/notifications', {message, date, day, time,}).then(resp => {
+    axios.post('/api/notifications', {category, message, time,}).then(resp => {
         
     })
 }

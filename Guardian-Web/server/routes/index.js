@@ -64,22 +64,21 @@ router.post("/login", (req, res, next) => {
 })
 
 router.post('/notifications', (req, res, next) => {
-  const sql = 'INSERT INTO notifications (message, date, day, time) VALUES (?, ?, ?, ?)'
+  const sql = 'INSERT INTO notifications (category, message, time) VALUES (?, ?, ?)'
 
-  pool.query(sql, [req.body.message, req.body.date, req.body.day, req.body.time], (err, results, fields) => {
+  pool.query(sql, [req.body.category, req.body.message, req.body.time], (err, results, fields) => {
     
     res.json({
       id: results.insertId,
+      category: req.body.category,
       message: req.body.message,
-      date: req.body.date,
-      day: req.body.day,
       time: req.body.time
     })
   })
 })
 
 router.get('/notifications', (req, res, next) => {
-  const sql = 'SELECT n.* FROM notifications n '
+  const sql = 'SELECT n.* FROM notifications n; '
 
   pool.query(sql, (err, results, fields) => {
     res.json(results)
@@ -110,14 +109,5 @@ router.get('/maps', (req, res, next) => {
 })
 
 module.exports = router;
-
-// var checkNotifications = setInterval(getNotifications, 10000)
-
-// export function getNotifications(date) {
-// axios.get(http://localhost:3001/api/notifications).then(resp => {
-//   if (resp.data[0].date == date) {
-//        sendNotification()
-//} 
-// })}
 
 

@@ -37,12 +37,6 @@ import { MonoText } from '../components/StyledText';
   state = {
     userLocation: null
   }
-
-  sendNotification = async () => {
-    // Notifications.presentLocalNotificationAsync({title:'message', body:'hi'})
-    // Notifications.scheduleLocalNotificationAsync({title:'message', body:'hi-scheduled'}, {time: (new Date()).getTime() + 1000})
-
-  }
  
     //this is the function that will be in onGetLocation
     setUserLocation = () => {
@@ -63,9 +57,9 @@ import { MonoText } from '../components/StyledText';
 
       // this.sendNotification()
 
-      getNotifications()
+      // getNotifications()
 
-      getNotificationsBack()
+      // getNotificationsBack()
       
     }
 
@@ -76,7 +70,7 @@ import { MonoText } from '../components/StyledText';
           errorMessage: 'Permission to access location was denied',
         });
       }
-      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 30000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
+      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 8000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
       console.log('enabled')
 
       const { status: existingStatus } = await Permissions.getAsync(
@@ -216,7 +210,6 @@ import { MonoText } from '../components/StyledText';
 }
 
 function mapStateToProps(appState) {
-  console.log(appState)
   return {
     notifications: appState.notifications
   }
@@ -232,10 +225,11 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
   }
   if (data){
     const { locations } = data;
-    getUserLocation(locations)
     getNotifications()
 
-    getNotificationsBack()
+    // getNotificationsBack()
+
+    getUserLocation(locations)
   }
 })
 
