@@ -5,6 +5,7 @@ import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 import Button from '@material-ui/core/Button';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
+import blue from '@material-ui/core/colors/blue'
 import './Notifications.css'
 
 const styles = theme => ({
@@ -14,8 +15,8 @@ const styles = theme => ({
   green: {
     boxShadow: '5px 10px lightblue',
     fontSize: 27,
-    backgroundColor: 'white',
-    color: green[500],
+    backgroundColor: 'rgb(115,57,244)',
+    color: green[100],
     width: '80%',
     margin: '20px 0',
     border: '1px solid lightblue'
@@ -24,9 +25,9 @@ const styles = theme => ({
     boxShadow: '5px 10px lightblue',
     fontSize: 27,
     margin: '20px 0',
-    backgroundColor: 'white',
-    backgroundColor: theme.palette.getContrastText(pink[300]),
-    color: pink[300],
+    backgroundColor: 'rgb(115,57,244)',
+    // backgroundColor: theme.palette.getContrastText(pink[100]),
+    color: pink[100],
     width: '80%',
     border: '1px solid lightblue',
     '&:hover': {
@@ -40,8 +41,8 @@ const styles = theme => ({
     margin: '20px 0',
     width: '80%',
     padding: '6px 12px',
-    backgroundColor: 'white',
-    color: '#0062cc',
+    backgroundColor: 'rgb(115,57,244)',
+    color: blue[100],
     border: '1px solid lightblue',
     fontFamily: [
       '-apple-system',
@@ -92,18 +93,19 @@ function CustomizedButtons(props) {
         color="primary"
         className={classNames(classes.margin, classes.pink)}
       >
-        Dentist Appointment
+       
       </Button><br></br>
       <Button
         variant="contained"
         color="primary"
         className={classNames(classes.margin, classes.pink)}
       >
-        Take Pill
+        
       </Button><br></br>
       <MuiThemeProvider theme={theme}>
         <Button variant="contained" color="primary" className={classes.green}>
-          Meeting
+        
+
         </Button><br></br>
       </MuiThemeProvider>
       <Button
@@ -112,7 +114,7 @@ function CustomizedButtons(props) {
         disableRipple
         className={classNames(classes.margin, classes.blue)}
       >
-        Clean Kitchen
+      
       </Button><br></br>
     </div>
   );
