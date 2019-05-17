@@ -3,11 +3,9 @@ import axios from 'axios'
 
 
 
-export function setNotification(message, date, day, time) {
+export function setNotification(notification) {
     
-    axios.post('/api/notifications', {message, date, day, time,}).then(resp => {
-        
-    })
+    axios.post('/api/notifications', notification)
 }
 
 export function getCoord() {

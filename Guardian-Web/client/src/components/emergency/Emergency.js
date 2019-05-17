@@ -5,10 +5,9 @@ import Navbar from '../nav/Navbar'
 import '../main/Main.css'
 import '../nav/Navbar.css'
 import Actiontest from '../actiontest'
-import '../addNotifications/AddNotifications.css'
 
 
-class AddNotifications extends React.Component {
+class Emergency extends React.Component {
     render() {
         return (
             <div>
@@ -23,10 +22,7 @@ class AddNotifications extends React.Component {
                     </div>
 
                     <div className="main">
-                        <h1>Add Notifications</h1>
-                        <div>
-                            <Actiontest />
-                        </div>
+                        <h1>Contact Nearest Emergency Services</h1>
               </div>          
             </div>
         </div>
@@ -35,4 +31,4 @@ class AddNotifications extends React.Component {
     }
 }
 
-export default AddNotifications
+export default Emergency
