@@ -21,7 +21,6 @@ router.post("/register", (req, res, next) => {
        error: "Username already taken"
      })
    } else {
-     const userId = 'guardian' + username
      const sql = "INSERT INTO users (username, password) VALUES (?, ?)"
 
      pool.query(sql, [username, password], (err, results, fields) => {
@@ -65,7 +64,7 @@ router.post("/login", (req, res, next) => {
 
 router.post('/notifications', (req, res, next) => {
 
-  const sql = 'INSERT INTO notifications (category, message, date, time, user_id) VALUES (?, ?, ?, ?)'
+  const sql = 'INSERT INTO notifications (category, message, time, user_id) VALUES (?, ?, ?, ?)'
 
   pool.query(sql, [req.body.category, req.body.message, req.body.time, req.body.user_id], (err, results, fields) => {
     
@@ -80,8 +79,8 @@ router.post('/notifications', (req, res, next) => {
 })
 
 router.get('/notifications', (req, res, next) => {
-
-  const sql = 'SELECT n., u.id* FROM notifications n, LEFT JOIN users u, ON u.id = n.user_id, WHERE n.user_id = 1;' 
+  // const userId = 
+  const sql = 'SELECT n.*, u.id FROM notifications n LEFT JOIN users u ON u.username = n.user_id WHERE n.user_id = ?' 
   // 'SELECT id, FROM users WHERE username = 'test''
 
 
