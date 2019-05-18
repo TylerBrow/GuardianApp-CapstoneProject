@@ -1,19 +1,25 @@
 import React, {useState} from 'react'
 import {setNotification} from '../actions/actions'
-import moment from 'moment'
+// import moment from 'moment'
+
+// import SimpleMap from './GoogleMap'
+
+
+
 
 const Test = (props) => {
 
   const [message, setMessage] = useState('')
   const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+  const [newDate, setTime] = useState('')
   const [category, setCategory] = useState('')
   const [user_id] = useState('')
-  const newDate = new Date(`${date} ${time}`)
+  const time = new Date(`${date} ${newDate}`)
+  
 
   function handleSubmit(e) {
       e.preventDefault()
-      var day = moment(date).format('dddd')
+      
 
       setNotification({category, message, date, time, user_id})
   }
