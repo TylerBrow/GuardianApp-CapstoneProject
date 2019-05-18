@@ -1,8 +1,8 @@
 {
     "db" : {
         "host"     : "localhost",
-        "user"     : "steph",
-        "password" : "sheyt67&&",
+        "user"     : "root",
+        "password" : "",
         "database" : "guardian_db"
     },
 

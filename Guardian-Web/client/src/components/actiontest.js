@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {setNotification} from '../actions/actions'
+import { useContext } from 'react'
+import { AuthContext } from "../lib/auth"
 // import moment from 'moment'
 
 // import SimpleMap from './GoogleMap'
@@ -13,8 +15,13 @@ const Test = (props) => {
   const [date, setDate] = useState('')
   const [newDate, setTime] = useState('')
   const [category, setCategory] = useState('')
-  const [user_id] = useState('')
-  const time = new Date(`${date} ${newDate}`)
+  let [user_id] = useState('')
+  let time = new Date(`${date} ${newDate}`)
+  time = time.getTime()
+
+  const { user } = useContext(AuthContext)
+  user_id = user
+  console.log(user_id)
   
 
   function handleSubmit(e) {
