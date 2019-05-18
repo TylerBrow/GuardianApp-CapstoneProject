@@ -17,6 +17,7 @@ export default class App extends React.Component {
       'Merienda': require('./assets/fonts/Merienda-Regular.ttf'),
       'Merienda-bold': require('./assets/fonts/Merienda-Bold.ttf')
     })
+    console.disableYellowBox = true;
   }
 
   render() {
