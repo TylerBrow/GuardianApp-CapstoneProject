@@ -7,14 +7,13 @@ import { AuthProvider, AuthRoute } from "../lib/auth"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import AddNotifications from './addNotifications/AddNotifications';
+import Tips from './tips/Tips'
 import "bulma-start/css/main.css"
 import "bulma-start/_javascript/main.js"
 import "./logo/Logo.css"
 import Logo from "./logo/Logo"
 import Test from '../components/actiontest'
-
-
-
+import Emergency from './emergency/Emergency'
 
 const App = props => {
   return (
@@ -26,11 +25,14 @@ const App = props => {
                     <Logo />
           </div>  
             {/* public routes */}
+            <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/addnotifications" component={AddNotifications} />
-            <Route exact path="/" component={Main}/>
-            <Route path="/home" component={Test}/>
+            <Route path="/tips" component={Tips} />
+            <Route path="/main" component={Main} />
+            <Route path="/home" component={Test} />
+            <Route path="/emergency" component={Emergency} />
 
             {/* private routes */}
             {/* <AuthRoute path="/" exact component={Main} /> */}

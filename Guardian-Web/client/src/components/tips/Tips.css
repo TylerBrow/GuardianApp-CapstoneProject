@@ -1,0 +1,25 @@
+.main h2 {
+    color: rgb(85, 48, 196);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.advice {
+    width: 70%;
+    margin-left: 10%;
+    font-size: 18px;
+}
+
+p {
+    text-align: left;
+}
+
+.safety span {
+    background-color: rgb(85, 48, 196);
+    color: white;
+}
+
+.while span {
+    background-color: rgb(85, 48, 196);
+    color: white;
+}
