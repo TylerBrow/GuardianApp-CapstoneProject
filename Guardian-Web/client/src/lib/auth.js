@@ -17,11 +17,21 @@ function isTokenExpired(token) {
   }
 }
 
-function getUser() {
+export function getUser() {
   try {
     const token = localStorage.getItem("authtoken")
     const decoded = decode(token)
     return decoded.username
+  } catch (err) {
+    return null
+  }
+}
+
+export function getUserID() {
+  try {
+    const token = localStorage.getItem("authtoken")
+    const decoded = decode(token)
+    return decoded.id
   } catch (err) {
     return null
   }
