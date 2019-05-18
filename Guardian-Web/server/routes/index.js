@@ -64,6 +64,9 @@ router.post("/login", (req, res, next) => {
 
 router.post('/notifications', (req, res, next) => {
 
+ // pool.query(sql, [req.body.category, req.body.message, req.body.date, req.body.time, req.body.user_id], (err, results, fields) => {
+
+
   const sql = 'INSERT INTO notifications (category, message, time, user_id) VALUES (?, ?, ?, ?)'
 
   pool.query(sql, [req.body.category, req.body.message, req.body.time, req.body.user_id], (err, results, fields) => {
@@ -78,10 +81,17 @@ router.post('/notifications', (req, res, next) => {
   })
 })
 
-router.get('/notifications', (req, res, next) => {
+router.get('/notifications/:user_id', (req, res, next) => {
+  // const sql = 'SELECT n., u.id* FROM notifications n, LEFT JOIN users u, ON u.id = n.user_id, WHERE n.user_id = 1;' 
+
+ // router.get('/notifications', (req, res, next) => {
+  
   // const userId = 
-  const sql = 'SELECT n.*, u.id FROM notifications n LEFT JOIN users u ON u.username = n.user_id WHERE n.user_id = ?' 
+  // const sql = 'SELECT n.*, u.id FROM notifications n LEFT JOIN users u ON u.username = n.user_id WHERE n.user_id = ?' 
   // 'SELECT id, FROM users WHERE username = 'test''
+  
+  const user_id = req.params.user_id;
+  const sql = `SELECT * from notifications WHERE user_id = ${user_id}`;
 
 
   pool.query(sql, (err, results, fields) => {
