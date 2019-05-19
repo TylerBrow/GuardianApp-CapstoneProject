@@ -64,9 +64,6 @@ router.post("/login", (req, res, next) => {
 
 router.post('/notifications', (req, res, next) => {
 
- // pool.query(sql, [req.body.category, req.body.message, req.body.date, req.body.time, req.body.user_id], (err, results, fields) => {
-
-
   const sql = 'INSERT INTO notifications (category, message, time, user_id) VALUES (?, ?, ?, ?)'
 
   pool.query(sql, [req.body.category, req.body.message, req.body.time, req.body.user_id], (err, results, fields) => {
@@ -91,10 +88,10 @@ router.get('/notifications/:user_id', (req, res, next) => {
   // 'SELECT id, FROM users WHERE username = 'test''
   
   const user_id = req.params.user_id;
-  const sql = `SELECT * from notifications WHERE user_id = ${user_id}`;
+  const sql = `SELECT * from notifications WHERE user_id = ?`;
 
 
-  pool.query(sql, (err, results, fields) => {
+  pool.query(sql, [req.params.user_id], (err, results, fields) => {
     res.json(results)
   })
 })
