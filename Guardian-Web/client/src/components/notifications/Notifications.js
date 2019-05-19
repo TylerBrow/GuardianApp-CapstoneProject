@@ -88,12 +88,20 @@ function CustomizedButtons(props) {
 
   return (
     <div className="reminders">
+      {/* {
+        this.props.map((item, i) => {
+          <Button>
+            {
+              item.message
+            }
+          </Button>
+        })
+      } */}
       <Button
         variant="contained"
         color="primary"
         className={classNames(classes.margin, classes.pink)}
       >
-       
       </Button><br></br>
       <Button
         variant="contained"

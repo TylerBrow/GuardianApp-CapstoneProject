@@ -28,7 +28,7 @@ const Test = (props) => {
       e.preventDefault()
       
 
-      setNotification({category, message, date, time, user_id})
+      setNotification({category, message, time, user_id})
   }
 
   return (

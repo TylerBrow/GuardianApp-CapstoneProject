@@ -25,9 +25,9 @@ import {
   SafeAreaView,
   SectionList
 } from 'react-native';
-import { WebBrowser } from 'expo';
+// import { WebBrowser } from 'expo';
 
-import { MonoText } from '../components/StyledText';
+// import { MonoText } from '../components/StyledText';
 
  class HomeScreen extends React.Component {
   static navigationOptions = {
