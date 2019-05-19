@@ -98,6 +98,7 @@ class NotificationsComponent extends Component {
     getNotifications(user_id)
   }
 
+
   render () {
     return <div>{this.CustomizedButtons(this.props)}</div>
   }
