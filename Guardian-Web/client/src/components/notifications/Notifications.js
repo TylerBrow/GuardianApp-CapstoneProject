@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue'
 import './Notifications.css'
+import {getNotifications} from '../../actions/actions';
+import { getUserID } from '../../lib/auth';
+import { decode } from "jsonwebtoken"
+
 
 const styles = theme => ({
   margin: {
@@ -83,53 +88,70 @@ const theme = createMuiTheme({
   },
 });
 
-function CustomizedButtons(props) {
-  const { classes } = props;
+class NotificationsComponent extends Component {
 
-  return (
-    <div className="reminders">
-      {/* {
-        this.props.map((item, i) => {
-          <Button>
-            {
-              item.message
-            }
-          </Button>
-        })
-      } */}
-      <Button
-        variant="contained"
-        color="primary"
-        className={classNames(classes.margin, classes.pink)}
-      >
-      </Button><br></br>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classNames(classes.margin, classes.pink)}
-      >
-        
-      </Button><br></br>
-      <MuiThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.green}>
-        
 
+  componentDidMount() {
+    const token = localStorage.getItem("authtoken")
+    const decoded = decode(token)
+    const user_id = decoded.username
+    getNotifications(user_id)
+  }
+
+
+  render () {
+    return <div>{this.CustomizedButtons(this.props)}</div>
+  }
+  
+  CustomizedButtons(props) {
+    const { classes } = props;
+  
+    return (
+      <div className="reminders">
+
+        
+        <Button
+          variant="contained"
+          color="primary"
+          className={classNames(classes.margin, classes.pink)}
+        >
+         
         </Button><br></br>
-      </MuiThemeProvider>
-      <Button
-        variant="contained"
-        color="primary"
-        disableRipple
-        className={classNames(classes.margin, classes.blue)}
-      >
-      
-      </Button><br></br>
-    </div>
-  );
+        
+        <Button
+          variant="contained"
+          color="primary"
+          className={classNames(classes.margin, classes.pink)}
+        >
+          
+        </Button><br></br>
+        <MuiThemeProvider theme={theme}>
+          <Button variant="contained" color="primary" className={classes.green}>
+          
+  
+          </Button><br></br>
+        </MuiThemeProvider>
+        <Button
+          variant="contained"
+          color="primary"
+          disableRipple
+          className={classNames(classes.margin, classes.blue)}
+        >
+        
+        </Button><br></br>
+      </div>
+    );
+  }
 }
 
-CustomizedButtons.propTypes = {
+NotificationsComponent .propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomizedButtons);
+function mapStateToProps(appState) {
+  return {
+     notifications: appState.notifications
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(NotificationsComponent));
