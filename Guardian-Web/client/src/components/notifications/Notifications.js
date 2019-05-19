@@ -9,7 +9,6 @@ import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue'
 import './Notifications.css'
 import {getNotifications} from '../../actions/actions';
-import { getUserID } from '../../lib/auth';
 
 const styles = theme => ({
   margin: {

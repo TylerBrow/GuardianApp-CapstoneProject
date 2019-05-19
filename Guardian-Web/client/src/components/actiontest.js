@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {setNotification} from '../actions/actions'
 import moment from 'moment'
-import {getUserID} from '../lib/auth';
 
 const Test = (props) => {
 
@@ -9,15 +8,16 @@ const Test = (props) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [category, setCategory] = useState('')
-  const [user_id] = useState(1)
+  let [user_id] = useState()
   const newDate = new Date(`${date} ${time}`)
 
   function handleSubmit(e) {
       e.preventDefault()
       var day = moment(date).format('dddd')
 
-      const user = getUserID();
-      setNotification({category, message, date, time, user_id: user})
+      user_id = getUserID();
+      console.log(user_id)
+      setNotification({category, message, date, time, user_id})
   }
 
   return (

@@ -27,15 +27,6 @@ export function getUser() {
   }
 }
 
-export function getUserID() {
-  try {
-    const token = localStorage.getItem("authtoken")
-    const decoded = decode(token)
-    return decoded.id
-  } catch (err) {
-    return null
-  }
-}
 
 const initialContext = {
   isAuthenticated: false,
