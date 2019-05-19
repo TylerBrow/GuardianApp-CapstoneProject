@@ -1,24 +1,32 @@
 import React, {useState} from 'react'
 import {setNotification} from '../actions/actions'
 import moment from 'moment'
+import { useContext } from 'react'
+import { AuthContext } from "../lib/auth"
+// import SimpleMap from './GoogleMap'
+
+
 
 const Test = (props) => {
 
   const [message, setMessage] = useState('')
   const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+  const [newDate, setTime] = useState('')
   const [category, setCategory] = useState('')
-  let [user_id] = useState()
-  const newDate = new Date(`${date} ${time}`)
+  let [user_id] = useState('')
+
+   let time = new Date(`${date} ${newDate}`)
+   time = time.getTime()
+
+    const { user } = useContext(AuthContext)    
+    user_id = user
 
   function handleSubmit(e) {
       e.preventDefault()
-      var day = moment(date).format('dddd')
+      
 
-      user_id = getUserID();
-      console.log(user_id)
-      setNotification({category, message, date, time, user_id})
-  }
+      setNotification({category, message, time, user_id})
+      }
 
   return (
     <div>

@@ -9,6 +9,9 @@ import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue'
 import './Notifications.css'
 import {getNotifications} from '../../actions/actions';
+import { getUserID } from '../../lib/auth';
+import { decode } from "jsonwebtoken"
+
 
 const styles = theme => ({
   margin: {
@@ -87,10 +90,14 @@ const theme = createMuiTheme({
 
 class NotificationsComponent extends Component {
 
+
   componentDidMount() {
-    const user_id = getUserID();
-    getNotifications(user_id);
+    const token = localStorage.getItem("authtoken")
+    const decoded = decode(token)
+    const user_id = decoded.username
+    getNotifications(user_id)
   }
+
 
   render () {
     return <div>{this.CustomizedButtons(this.props)}</div>
@@ -101,6 +108,8 @@ class NotificationsComponent extends Component {
   
     return (
       <div className="reminders">
+
+        
         <Button
           variant="contained"
           color="primary"
@@ -108,6 +117,7 @@ class NotificationsComponent extends Component {
         >
          
         </Button><br></br>
+        
         <Button
           variant="contained"
           color="primary"
@@ -139,7 +149,6 @@ NotificationsComponent .propTypes = {
 };
 
 function mapStateToProps(appState) {
-  console.log(appState.notifications)
   return {
      notifications: appState.notifications
   }

@@ -32,7 +32,7 @@ class SimpleMap extends Component {
     }
 
     static defaultProps = {
-        center: {
+        defaultCenter: {
           lat: 59.95,
           lng: 30.33
         },
@@ -64,7 +64,6 @@ class SimpleMap extends Component {
      
 
     function mapStatetoProps(appState) {
-        console.log(appState.center)
         return {
             center: appState.center,
             lat: Number(appState.lat),
@@ -73,4 +72,3 @@ class SimpleMap extends Component {
     }
     export default connect(mapStatetoProps)(SimpleMap)
 
-    // 202	36.1586439	-115.1523737	NULL	1557865422997.7498
