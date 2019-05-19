@@ -9,11 +9,10 @@ export function setNotification(notification) {
 }
 
 export function getNotifications(user_id) {
-    console.log('test');
     axios.get(`/api/notifications/${user_id}` ).then(resp => {
         store.dispatch({
             type: 'GET_NOTIFICATIONS',
-            notifications: resp
+            notifications: resp.data
         })
     })
 }
