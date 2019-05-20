@@ -24,9 +24,9 @@ const Test = (props) => {
   function handleSubmit(e) {
       
       
+
       setNotification({category, message, time, user_id})
-      
-  }
+      }
 
   return (
     <div>
