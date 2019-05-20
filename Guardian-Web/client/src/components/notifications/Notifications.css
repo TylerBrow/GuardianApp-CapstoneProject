@@ -1,6 +1,6 @@
 .notificationreminders {
-    width: 40%;
-    border-right: 3px solid rgb(136, 179, 225);
+    width: 35%;
+    /* border-right: 3px solid rgb(136, 179, 225); */
     position:relative;
     text-align: center;
     height: 100vh;
@@ -13,7 +13,7 @@
     right:0;
     left:0;
     bottom:0;
-    border-right:5px solid rgb(178, 165, 218);
+    /* border-right:5px solid rgb(178, 165, 218); */
     height: 100vh;
 }
 

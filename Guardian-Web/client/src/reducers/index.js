@@ -3,6 +3,7 @@ const initialState = {
   lat: '',
   lng: '',
   notifications: [],
+  newTime : []
 }
 
 export default function (state = initialState, action) {
@@ -10,7 +11,7 @@ export default function (state = initialState, action) {
     case 'GET_COORD':
      return {...state, center: action.center, lat: action.lat, lng: action.lng}
      case 'GET_NOTIFICATIONS':
-     return {...state, notifications: action.notifications}
+     return {...state, notifications: action.notifications, newTime: action.newTime}
     default:
       return state
   }

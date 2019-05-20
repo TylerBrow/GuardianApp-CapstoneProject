@@ -22,7 +22,7 @@ const Test = (props) => {
     user_id = user
 
   function handleSubmit(e) {
-      e.preventDefault()
+      
       
       setNotification({category, message, time, user_id})
       
