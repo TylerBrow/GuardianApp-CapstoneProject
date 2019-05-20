@@ -49,6 +49,7 @@ class SimpleMap extends Component {
               center={this.props.center} 
               defaultZoom={this.props.zoom}
               zoom={15}
+              yesIWantToUseGoogleMapApiInternals
             >
               <SampleMarker
                 lat={this.props.lat}
