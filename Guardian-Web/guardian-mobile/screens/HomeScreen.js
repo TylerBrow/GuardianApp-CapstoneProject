@@ -1,7 +1,7 @@
 import React from 'react'
-import { getUserLocation, getNotifications, getNotificationsBack } from '../actions/actions'
+import { getUserLocation, getNotifications } from '../actions/actions'
 
-import { ListItem, Header, Icon } from 'react-native-elements'
+import { ListItem, Header, Icon, Button } from 'react-native-elements'
 
 import { Notifications } from 'expo';
 
@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import {
+  AsyncStorage,
   Image,
   Platform,
   ScrollView,
@@ -21,13 +22,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
   SafeAreaView,
   SectionList
 } from 'react-native';
-// import { WebBrowser } from 'expo';
-
-// import { MonoText } from '../components/StyledText';
 
  class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -54,14 +51,32 @@ import {
 
     componentDidMount() {
       this._getLocationAsync()
+      this.load()
 
-      // this.sendNotification()
-
-      // getNotifications()
-
-      // getNotificationsBack()
-      
+      this.gettingUser()
     }
+
+    load = async () => {
+      let user = ''
+      try {
+        user = await AsyncStorage.getItem('user')
+      } catch (e) {
+        console.error('Failed to load name.')
+      }
+      return user;
+    }
+
+    gettingUser = () => {
+      const user = this.props.userId
+    const _storeData = async user => {
+      try {
+        await AsyncStorage.setItem('user', this.props.userId);
+      } catch (error) {
+        // Error saving data
+      }
+    }
+    _storeData()
+  }
 
     _getLocationAsync = async () => {
       let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -71,7 +86,8 @@ import {
         });
       }
       await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 8000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
-      console.log('enabled')
+
+      await Location.startGeofencingAsync('geofence', [{latitude: 36, longitude: -115.46566, radius: 1, notifyOnExit: true}])
 
       const { status: existingStatus } = await Permissions.getAsync(
           Permissions.NOTIFICATIONS
@@ -85,6 +101,12 @@ import {
         if (finalStatus !== 'granted') {
           return;
         }
+    }
+
+    handleLogout = () => {
+      const user = AsyncStorage.removeItem('user')
+      console.log(user)
+      this.props.navigation.navigate('Login')
     }
 
   render() {
@@ -109,11 +131,11 @@ import {
             elevation: 10,
             paddingTop: 0}}>
           <Header 
-            leftComponent={{text: 'CRUZ', style:{color: '#fff', fontSize: 50, marginTop: 0, paddingTop: 0, fontWeight: '900'}}}
+            leftComponent={{text: `${this.props.userId}`, style:{color: '#fff', fontSize: 50, marginTop: 0, paddingTop: 0, fontWeight: '900', textTransform: 'capitalize'}}}
             leftContainerStyle={{flex: 4}}
             backgroundColor={ 'transparent'}
             containerStyle={{ marginTop: -10, paddingTop: 0, paddingRight: 20, backgroundColor: 'transparent', height: 150, paddingTop: 0}}
-            rightComponent={{icon: 'place', color: '#fff', size: 60, style:{marginRight: 20, marginTop: 0, paddingTop: 0}}}
+            rightComponent={{icon: 'place', color: '#fff', size: 60, style:{marginRight: 20, marginTop: 0, paddingTop: 0, onPress:{}}}}
             rightContainerStyle={{flex: 2}}
           />
           </LinearGradient>
@@ -140,7 +162,6 @@ import {
             <ListItem 
               key = {"key-"+ i}
               style={styles.listItem}
-              // key="item-2"
               leftIcon={
               <Icon 
                 name="stethoscope"
@@ -150,7 +171,7 @@ import {
                 />}
               title= {item.message}
               titleStyle={{fontSize: 27, fontWeight: '900', color:"#fc7b9b"}}
-              subtitle={`${item.date} ${item.day}`}
+              subtitle= {moment(Number(item.time)).format('LLL')}
               subtitleStyle={{fontSize: 20}}
             /> 
             ))
@@ -203,6 +224,15 @@ import {
               subtitleStyle={{fontSize: 20}}
             />
         </View>
+        <Button
+          title= 'Logout'
+          type='solid'
+          raised= {true}
+          buttonStyle={{width: 300, height: 65, backgroundColor: 'white'}}
+          titleStyle={{color: 'black', fontSize: 30}}
+          containerStyle={{width: 300, height: 65, marginLeft: '15%', marginBottom: 20}}
+          onPress={this.handleLogout}
+        />
       </ScrollView>
     </SafeAreaView>
     );
@@ -211,7 +241,8 @@ import {
 
 function mapStateToProps(appState) {
   return {
-    notifications: appState.notifications
+    notifications: appState.notifications,
+    userId: appState.user
   }
 }
 
@@ -225,13 +256,37 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
   }
   if (data){
     const { locations } = data;
-    getNotifications()
 
-    // getNotificationsBack()
+    const load = async () => {
+      let user = ''
+      try {
+        user = await AsyncStorage.getItem('user')
+        getNotifications(user)
+        getUserLocation(locations, user)
+        console.log(user)
+      } catch (e) {
+        console.error('Failed to load name.')
+      }
+      return user;
+    }
 
-    getUserLocation(locations)
+    load()
   }
 })
+
+TaskManager.defineTask('geofence', ({ data: { eventType, region }, error }) => {
+  if (error) {
+    // check `error.message` for more details.
+    return;
+  }
+  if(region){
+    console.log(region)
+  }
+  if (eventType === Location.GeofencingEventType.Exit) {
+    console.log("You've left region:", region);
+  }
+})
+
 
 const styles = StyleSheet.create({
   container: {
