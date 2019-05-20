@@ -87,11 +87,20 @@ router.get('/notifications/:user_id', (req, res, next) => {
   // const sql = 'SELECT n.*, u.id FROM notifications n LEFT JOIN users u ON u.username = n.user_id WHERE n.user_id = ?' 
   // 'SELECT id, FROM users WHERE username = 'test''
   
-  const user_id = req.params.user_id;
-  const sql = `SELECT * from notifications WHERE user_id = ?`;
+  // const user_id = req.params.user_id;
+  const sql = `SELECT * FROM notifications WHERE user_id = ?`;
 
 
   pool.query(sql, [req.params.user_id], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+router.get('/getuser/:user', (req, res, next) => {
+  const user = req.params.user
+  const sql = `SELECT username FROM users WHERE username = ?`
+
+  pool.query(sql, [user], (err, results, fields) => {
     res.json(results)
   })
 })
@@ -100,13 +109,15 @@ router.post('/maps', (req, res, next) => {
   const time = req.body.time
   const lat = req.body.lat
   const longitude = req.body.longitude
-  const sql= `INSERT INTO maps (lat, lng, time) VALUES (?, ?, ?)`
+  const userId = req.body.userId
+  const sql= `INSERT INTO maps (lat, lng, time, user_id) VALUES (?, ?, ?, ?)`
 
-  pool.query(sql, [lat, longitude, time], (err, results, fields) => {
+  pool.query(sql, [lat, longitude, time, userId], (err, results, fields) => {
     res.json({
       lat: lat, 
       longitude: longitude, 
-      time:time
+      time:time,
+      userId: userId
     })
   })
 })
