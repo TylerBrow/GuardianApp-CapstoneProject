@@ -99,12 +99,12 @@ class Navbar extends React.Component {
 
     return (
       <div className="navmenu">
-        <Button className="burger"
+        <Button className="burger"j
           aria-owns={anchorEl ? 'simple-menu' : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <i className="material-icons">dehaze</i>
+         <i className="material-icons">dehaze</i>
         </Button>
         <Menu
           className={this.props.classes.simpleMenu}
