@@ -13,9 +13,6 @@ const Main = props => {
     return (
         <Provider store={store}>
             <div>
-                <div className="navdiv">
-                    <Navbar props={props}/>
-                </div>
 
                 <div className="homepage">   
                     <div className="notificationreminders">
