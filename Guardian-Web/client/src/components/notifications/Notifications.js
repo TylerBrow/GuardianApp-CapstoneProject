@@ -11,6 +11,7 @@ import './Notifications.css'
 import {getNotifications} from '../../actions/actions';
 import { getUserID } from '../../lib/auth';
 import { decode } from "jsonwebtoken"
+import moment from 'moment'
 
 
 const styles = theme => ({
@@ -28,7 +29,7 @@ const styles = theme => ({
   },
   pink: {
     boxShadow: '5px 10px lightblue',
-    fontSize: 27,
+    fontSize: 20,
     margin: '20px 0',
     backgroundColor: 'rgb(115,57,244)',
     // backgroundColor: theme.palette.getContrastText(pink[100]),
@@ -105,19 +106,28 @@ class NotificationsComponent extends Component {
   
   CustomizedButtons(props) {
     const { classes } = props;
+
+    
   
     return (
       <div className="reminders">
 
-        
+        {
+          
+          this.props.notifications.map((item, i) => (
+            
         <Button
           variant="contained"
           color="primary"
           className={classNames(classes.margin, classes.pink)}
+          key = {'key' + i}
         >
-         
-        </Button><br></br>
-        
+         {item.message}<br></br>
+         {moment(Number(item.time)).format('LLL')}
+        </Button>
+          ))
+        }
+       
         <Button
           variant="contained"
           color="primary"
@@ -150,7 +160,9 @@ NotificationsComponent .propTypes = {
 
 function mapStateToProps(appState) {
   return {
-     notifications: appState.notifications
+     notifications: appState.notifications,
+     newTime: appState.newTime
+
   }
 }
 

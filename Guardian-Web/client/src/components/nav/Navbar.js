@@ -1,120 +1,213 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import './Navbar.css';
-import { Link } from 'react-router-dom'
-import { bindCallback } from 'rxjs';
-import purple from '@material-ui/core/colors/purple'; 
-import green from '@material-ui/core/colors/green';
 import Fade from '@material-ui/core/Fade';
+import './Navbar.css';
+import { withStyles } from '@material-ui/core/styles';
+// import { bindCallback } from 'rxjs';
+// import purple from '@material-ui/core/colors/purple'; 
+// import green from '@material-ui/core/colors/green';
+// import login from '../auth/Login'
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import { AuthContext } from '../../lib/auth';
 
-class FadeMenu extends React.Component {
+const styles = {
+  list: {
+    width: 300, 
+    
+  },
+  sideList: {
+    width: 'auto',
+
+  }
+  
+};
+
+class TemporaryDrawer extends React.Component {
   state = {
-    anchorEl: null,
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
   };
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
   };
 
   render() {
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+    const { classes } = this.props;
+
+    const sideList = (
+      <div className={classes.list}>
+        <List>
+            <ListItem>
+            <Link to='/login'><MenuItem className={this.props.classes.tips} onClick={this.handleSignout}>Logout</MenuItem></Link>
+            </ListItem>
+
+        </List>
+      </div>
+    );
 
     return (
       <div>
-        <Button
-          aria-owns={open ? 'fade-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Home
-        </Button>
-        <Menu
-          id="fade-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={this.handleClose}
-          TransitionComponent={Fade}
-        >
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu>
-
-        <Button
-          aria-owns={open ? 'fade-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Alerts
-        </Button>
-        <Menu
-          id="fade-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={this.handleClose}
-          TransitionComponent={Fade}
-        >
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu>
-      
-
-
-<Button
-aria-owns={open ? 'fade-menu' : undefined}
-aria-haspopup="true"
-onClick={this.handleClick}
->
-Check Points
-</Button>
-<Menu
-id="fade-menu"
-anchorEl={anchorEl}
-open={open}
-onClose={this.handleClose}
-TransitionComponent={Fade}
->
-<MenuItem onClick={this.handleClose}>Profile</MenuItem>
-<MenuItem onClick={this.handleClose}>My account</MenuItem>
-<MenuItem onClick={this.handleClose}>Logout</MenuItem>
-</Menu>
-
-
-<Button
-aria-owns={open ? 'fade-menu' : undefined}
-aria-haspopup="true"
-onClick={this.handleClick}
->
-Tips
-</Button>
-<Menu
-id="fade-menu"
-anchorEl={anchorEl}
-open={open}
-onClose={this.handleClose}
-TransitionComponent={Fade}
->
-<MenuItem onClick={this.handleClose}>Profile</MenuItem>
-<MenuItem onClick={this.handleClose}>My account</MenuItem>
-<MenuItem onClick={this.handleClose}>Logout</MenuItem>
-</Menu>
-</div>
+        <div id="menubuttons">
+        <Button onClick={this.toggleDrawer('right', true)}>Home</Button>
+        <Button onClick={this.toggleDrawer('right', true)}>Alerts</Button>
+        <Button onClick={this.toggleDrawer('right', true)}>Check Points</Button>
+        <Button onClick={this.toggleDrawer('right', true)}>Tips</Button>
+        </div>
+  
+        <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
+          <div className="menudrawers"
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer('right', false)}
+            onKeyDown={this.toggleDrawer('right', false)}
+          >
+            {sideList}
+          </div>
+        </Drawer>
+      </div>
     );
   }
 }
 
-export default FadeMenu;
+TemporaryDrawer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(TemporaryDrawer);
+
+
+// class Navbar extends React.Component {
+//   state = {
+//     anchorEl: null,
+//   };
+
+//   handleLink = url => {
+//         console.log(this.props.props)
+//         this.props.props.history.push(url)
+//       }
+
+
+//   handleClick = event => {
+//     this.setState({ anchorEl: event.currentTarget });
+//   };
+
+//   handleClose = () => {
+//     this.setState({ anchorEl: null });
+//   };
+
+//   handleSignout = (e) => {
+//         window.localStorage.removeItem("authtoken")
+//         console.log(window.localStorage)
+//       }
+
+//   render() {
+//     const { anchorEl } = this.state;
+//     const open = Boolean(anchorEl);
+
+//     return (
+//       <div className="navmenu">
+//         <Button
+//           aria-owns={open ? 'fade-menuone' : undefined}
+//           aria-haspopup="true"
+//           onClick={this.handleClick}
+//         >
+//           Home
+//         </Button>
+//         <Menu
+//           // className={this.props.classes.fadeMenuone}
+//           id="fade-menuone"
+//           anchorEl={anchorEl}
+//           open={open}
+//           onClose={this.handleClose}
+//           TransitionComponent={Fade}
+//         >
+//         <MenuItem>Sign Out</MenuItem>
+//         </Menu>
+        
+//         <Button
+//           aria-owns={open ? 'fade-menu' : undefined}
+//           aria-haspopup="true"
+//           onClick={this.handleClick}
+//         >
+//           Alerts
+//         </Button>
+//         <Menu
+//           id="fade-menu"
+//           anchorEl={anchorEl}
+//           open={open}
+//           onClose={this.handleClose}
+//           TransitionComponent={Fade}
+//         >
+//           <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+//           <MenuItem onClick={this.handleClose}>My account</MenuItem>
+//           <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+//         </Menu>
+      
+//         <Button
+//         aria-owns={open ? 'fade-menu' : undefined}
+//         aria-haspopup="true"
+//         onClick={this.handleClick}
+//         >
+//         Check Points
+//         </Button>
+//         <Menu
+//         id="fade-menu"
+//         anchorEl={anchorEl}
+//         open={open}
+//         onClose={this.handleClose}
+//         TransitionComponent={Fade}
+//         >
+//         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+//         <MenuItem onClick={this.handleClose}>My account</MenuItem>
+//         <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+//         </Menu>
+
+
+//         <Button
+//         aria-owns={open ? 'fade-menu' : undefined}
+//         aria-haspopup="true"
+//         onClick={this.handleClick}
+//         >
+//         Tips
+//         </Button>
+//         <Menu
+//         id="fade-menu"
+//         anchorEl={anchorEl}
+//         open={open}
+//         onClose={this.handleClose}
+//         TransitionComponent={Fade}
+//         >
+//         <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+//         <MenuItem onClick={this.handleClose}>My account</MenuItem>
+//         <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+//         </Menu>
+//         </div>
+//         );
+//         }
+//         }
+
+//         Navbar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
+
+// export default Navbar
 
 // const styles = theme => ({
 //   add: {
