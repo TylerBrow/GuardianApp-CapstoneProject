@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
 import {setNotification} from '../actions/actions'
-import moment from 'moment'
 import { useContext } from 'react'
 import { AuthContext } from "../lib/auth"
-// import SimpleMap from './GoogleMap'
-
 
 
 const Test = (props) => {
@@ -52,9 +49,6 @@ const Test = (props) => {
           </label>
           <button>Submit</button>
       </form>
-      {/* <div>
-          <SimpleMap/>
-      </div> */}
     </div>
   )
 }

@@ -6,14 +6,10 @@
 }
 
 .login {
-    background-image: linear-gradient(rgb(115,57,204),rgb(115,57,244));
+    background-color: rgb(2, 2, 85);
     height: 100vh;
     padding-top: 100px;
 }
-
-/* .logo {
-    background-color: rgb(115,57,244);
-} */
 
 .member {
    display: flex;
@@ -23,10 +19,9 @@
 .name {
     font-family: 'Merienda';
     font-weight: bolder;
-    border-bottom: 3px solid black;
-    border-radius: 50%;
-}
-
-.loginButton {
-
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    font-size: 65px;
+    color: rgb(115, 57, 244, 1);
 }
