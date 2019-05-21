@@ -65,9 +65,11 @@ body {
     
 }
 .marker {
-    width: 5px;
+    width: 12px;
+    color: red;
     background-color: red;
-    border-radius: 3px;
+    border-radius: 15px;
+    opacity: .8;
 }
 
 /* .navdiv {

@@ -6,7 +6,9 @@ import {getCoord} from '../actions/actions'
 import Marker from '../Marker/Marker'
 
 const SampleMarker = ({text}) => <div className='marker'>{text}</div>
+const handleApiLoaded = (map, maps) => {
 
+}
 class CheckPoint extends Component {
 
     componentWillMount() {
@@ -39,7 +41,7 @@ class CheckPoint extends Component {
                     <SampleMarker
                       lat={item.lat}
                       lng={item.lng}
-                      
+                      text = 'G'
                       />
                  ))
              }
@@ -61,3 +63,6 @@ class CheckPoint extends Component {
         }
     }
     export default connect(mapStatetoProps)(CheckPoint)
+
+
+    //AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc
