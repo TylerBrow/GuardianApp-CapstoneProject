@@ -115,12 +115,12 @@ import {
         <ScrollView style={styles.viewContainer}>
       {/* you add the className as a prop example above */}
           <Header
-            leftComponent={{text: 'Guardian', style:{color: 'rgba(115, 57, 244, .7)', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
+            leftComponent={{text: 'Guardian', style:{color: 'rgb(115, 57, 244)', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
             leftContainerStyle={{flex: 3}}
             backgroundColor={ '#fff'}
             containerStyle={{ borderBottomColor: '#fff'}}
           />
-          <LinearGradient colors={['rgba(115,57,244,1)', 'rgba(115,57,204,1)']} style={{margin: 15, height: 150, borderWidth: 1,
+          <LinearGradient colors={['rgb(2, 2, 85)', 'rgb(2, 2, 85)']} style={{margin: 15, height: 150, borderWidth: 1,
             borderColor: 'transparent',
             borderRadius: 10,
             height: 130,
