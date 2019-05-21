@@ -11,7 +11,7 @@ body {
 .main {
     width: 100%;
     text-align: center;
-    background-image: url('http://www.cultivatingculture.com/wp-content/uploads/2017/07/Your-Brain-on-Art.jpg');
+    /* background-image: url('https://i.pinimg.com/originals/82/43/c2/8243c29d91708c1da1ecd8bc51803f2e.jpg'); */
     background-repeat: no-repeat;
     background-size: 120%;
     
@@ -57,6 +57,11 @@ body {
     line-height: 100px;
     color: rgb(115, 57, 244, 1);
     
+}
+.marker {
+    width: 5px;
+    background-color: red;
+    border-radius: 3px;
 }
 
 /* .navdiv {

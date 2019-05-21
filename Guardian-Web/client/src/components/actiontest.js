@@ -38,7 +38,7 @@ const Test = (props) => {
             <option value='Tasks'>Tasks</option>
             <option value='Custom'>Custom</option>
           </select>
-          <input type='text' placeholder='message' onChange={e => setMessage(e.target.value)} />
+          <input type='text' placeholder='message' onChange={e => setMessage(e.target.value)} maxLength='30' />
           <input type='date' placeholder='date' onChange={e => setDate(e.target.value)} />
           <input type='time' onChange={e => setTime(e.target.value)} />
           <button>Submit</button>

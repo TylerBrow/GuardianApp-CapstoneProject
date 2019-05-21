@@ -123,7 +123,7 @@ router.post('/maps', (req, res, next) => {
 })
 
 router.get('/maps', (req, res, next) => {
-  const sql = 'SELECT m.lat, m.lng FROM maps m'
+  const sql = 'SELECT m.lat, m.lng, m.time FROM maps m'
 
   pool.query(sql, (err, results, fields) => {
     res.json(results)

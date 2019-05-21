@@ -23,8 +23,10 @@ export function getNotifications(user_id) {
 
 export function getCoord() {
     axios.get('/api/maps').then(resp => {
+        console.log(resp.data)
         store.dispatch({
             type: 'GET_COORD',
+            all: resp.data,
             center: resp.data[resp.data.length - 1],
             lat: resp.data[resp.data.length - 1].lat,
             lng: resp.data[resp.data.length - 1].lng
