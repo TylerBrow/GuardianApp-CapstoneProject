@@ -1,35 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 import GoogleMapReact from 'google-map-react';
 import {connect} from 'react-redux'
 import {getCoord} from '../actions/actions'
 
-const SampleMarker = ({text}) => <div>{text}</div>
+import Marker from '../Marker/Marker'
 
+const SampleMarker = ({text}) => <div className='marker'>{text}</div>
 
-class SimpleMap extends Component {
-  
-  // getCoords = () => {
-    
-  //   console.log(this.props.coord)
-  //   let center = this.props.coord[this.props.coord.length - 1]
-  //   //const lat = center.lat
-  //   console.log(center)
-  //     //console.log(lat)
-  // }
+class CheckPoint extends Component {
 
-    componentDidMount() {
-        
+    componentWillMount() {
+        getCoord()
     }
 
-    // componentDidUpdate(){
-    //   this.getCoords()
-    // }
-
-    componentWillMount(){
-        getCoord()  
-        // console.log(this.props.coord)
-        // this.getCoords()
-    }
 
     static defaultProps = {
         defaultCenter: {
@@ -42,7 +25,7 @@ class SimpleMap extends Component {
       render() {
         return (
           // Important! Always set the container height explicitly
-          <div style={{ height: '100%', width: '100%'}}>
+          <div style={{ height: '100%', width: '100%' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
             //   defaultCenter={this.props.coord[this.props.coord.length - 1]}
@@ -51,12 +34,16 @@ class SimpleMap extends Component {
               zoom={15}
               yesIWantToUseGoogleMapApiInternals
             >
-              <SampleMarker
-                lat={this.props.lat}
-                lng={this.props.lng}
-                // center={this.center}
-                text="G"
-              />
+             {
+                 this.props.all.map(item => (
+                    <SampleMarker
+                      lat={item.lat}
+                      lng={item.lng}
+                      
+                      />
+                 ))
+             }
+
             </GoogleMapReact>
           </div>
         );
@@ -65,11 +52,12 @@ class SimpleMap extends Component {
      
 
     function mapStatetoProps(appState) {
+        console.log(appState.all)
         return {
+            all: appState.all,
             center: appState.center,
             lat: Number(appState.lat),
             lng: Number(appState.lng)
         }
     }
-    export default connect(mapStatetoProps)(SimpleMap)
-
+    export default connect(mapStatetoProps)(CheckPoint)

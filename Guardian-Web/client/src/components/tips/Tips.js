@@ -10,10 +10,6 @@ class Tips extends React.Component {
     render() {
         return (
             <div>
-                <div className="navdiv">
-                    <Navbar props={this.props}/>
-                </div>
-
                 <div className="homepage">   
                     <div className="notificationreminders">
                         <h1>Notification Reminders</h1>

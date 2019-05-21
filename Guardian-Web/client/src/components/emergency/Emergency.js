@@ -11,9 +11,9 @@ class Emergency extends React.Component {
     render() {
         return (
             <div>
-                <div className="navdiv">
+                {/* <div className="navdiv">
                     <Navbar props={this.props}/>
-                </div>
+                </div> */}
 
                 <div className="homepage">   
                     <div className="notificationreminders">

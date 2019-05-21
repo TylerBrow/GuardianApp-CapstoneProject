@@ -1,5 +1,6 @@
 body {
     height: 100%;
+    background-color: rgb(2, 2, 85)
 }
 
 .homepage {
@@ -11,9 +12,13 @@ body {
 .main {
     width: 100%;
     text-align: center;
-    background-image: url('http://www.cultivatingculture.com/wp-content/uploads/2017/07/Your-Brain-on-Art.jpg');
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 95vh;
+    border-radius: 5px;
+    /* background-image: url('http://www.cultivatingculture.com/wp-content/uploads/2017/07/Your-Brain-on-Art.jpg');
     background-repeat: no-repeat;
-    background-size: 120%;
+    background-size: 120%; */
     
     
 }
@@ -36,11 +41,12 @@ body {
 /* }  */
 
 .googlemap {
-    width: 80%;
-    height: 70%;
-    border: 8px solid purple;
-    border-radius: 10px;
+    width: 90%;
+    height: 80%;
+    border: 3px solid white;
+    border-radius: 5px;
     margin:auto;
+    box-shadow: '#000';
 }
 
 /* .homepage h1 {
@@ -57,6 +63,11 @@ body {
     line-height: 100px;
     color: rgb(115, 57, 244, 1);
     
+}
+.marker {
+    width: 5px;
+    background-color: red;
+    border-radius: 3px;
 }
 
 /* .navdiv {

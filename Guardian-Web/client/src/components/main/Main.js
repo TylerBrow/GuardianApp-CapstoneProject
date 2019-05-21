@@ -7,7 +7,7 @@ import Navbar from '../nav/Navbar'
 import Notifications from '../notifications/Notifications'
 
 import SimpleMap from '../GoogleMap'
-
+import CheckPoint from '../CheckpointMap'
 
 const Main = props => {
     return (
@@ -23,7 +23,7 @@ const Main = props => {
                     <div className="main">
                         <h1>Guardian Tracker</h1>
                         <div className="googlemap">
-                            <SimpleMap />
+                            <CheckPoint />
                         </div>
                     </div>
                 </div>
