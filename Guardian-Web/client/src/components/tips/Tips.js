@@ -1,16 +1,16 @@
 import React from 'react'
 import Notifications from '../notifications/Notifications'
 import '../notifications/Notifications.css'
-import Navbar from '../nav/Navbar'
 import '../main/Main.css'
 import '../nav/Navbar.css'
 import './Tips.css'
+import Logo from '../logo/Logo'
 
 class Tips extends React.Component {
     render() {
         return (
             <div>
-
+                <Logo />
                 <div className="homepage">   
                     <div className="notificationreminders">
                         <h1>Notification Reminders</h1>

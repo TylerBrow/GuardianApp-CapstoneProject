@@ -1,9 +1,13 @@
 .notificationreminders {
-    width: 35%;
-    /* border-right: 3px solid rgb(136, 179, 225); */
+    width: 40%;
     position:relative;
     text-align: center;
-    height: 100vh;
+    height: 90vh;
+    border-radius: 5px;
+    overflow: scroll;
+    margin-left: 20px;
+    margin-top: 20px;
+    background: linear-gradient(87deg,#825ee4 0,#5e72e4 100%);
 }
 
 .notificationreminders::after {
@@ -13,14 +17,12 @@
     right:0;
     left:0;
     bottom:0;
-    /* border-right:5px solid rgb(178, 165, 218); */
     height: 100vh;
 }
 
 .homepage h1 {
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 32px;
     line-height: 100px;
-    color: rgb(115, 57, 244, 1);
-    
+    color: white;    
 }

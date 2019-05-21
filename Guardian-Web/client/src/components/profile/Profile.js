@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Notifications from '../notifications/Notifications'
 import '../notifications/Notifications.css'
-import Navbar from '../nav/Navbar'
 import '../main/Main.css'
 import '../nav/Navbar.css'
-import Actiontest from '../actiontest'
+import '../addNotifications/AddNotifications.css'
+import Logo from '../logo/Logo'
+import '../logo/Logo.css'
 
-
-class Emergency extends React.Component {
+class Profile extends React.Component {
     render() {
         return (
             <div>
-                <div className="navdiv">
-                    <Navbar props={this.props}/>
-                </div>
+                <div className="logo">
+                    <Logo />
+                </div>  
 
                 <div className="homepage">   
                     <div className="notificationreminders">
@@ -22,13 +22,12 @@ class Emergency extends React.Component {
                     </div>
 
                     <div className="main">
-                        <h1>Contact Nearest Emergency Services</h1>
-              </div>          
-            </div>
-        </div>
-            
+                        <h1>Profile</h1>
+                    </div>          
+                </div>
+            </div>    
         )
     }
 }
 
-export default Emergency
+export default Profile

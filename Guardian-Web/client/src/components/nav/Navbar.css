@@ -4,26 +4,16 @@
     left: 25%;
 }
 
-#menubuttons button {
+/* #menubuttons button {
     color: white;
     font-size: 20px;
-    padding: 0 40px;
-}
-
-.material-icons {
-    font-size: 60px;
-}
-
-.MuiListItem-button-184 {
-    transition: background-color 150ms ease-out 0ms;
-}
-
-/* #menubuttons {
-    display: flex;
-    justify-content: center;
-    color: white;
+    padding: 0px 45px;
+    margin-right: 10px;
+    height: 40px;
+    font-weight: bold;
 } */
 
-.menudrawers {
-    font-size: 20px;
-}
+/* #menubuttons button:hover{
+    background: white;
+    color: rgb(115,57,244);
+} */

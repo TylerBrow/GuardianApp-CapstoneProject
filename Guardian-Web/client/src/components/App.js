@@ -3,17 +3,13 @@ import { Provider } from "react-redux"
 import store from "../store"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Main from "./main/Main"
-import { AuthProvider, AuthRoute } from "../lib/auth"
+import { AuthProvider } from "../lib/auth"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import AddNotifications from './addNotifications/AddNotifications';
 import Tips from './tips/Tips'
-import "bulma-start/css/main.css"
-import "bulma-start/_javascript/main.js"
-import "./logo/Logo.css"
-import Logo from "./logo/Logo"
-import Test from '../components/actiontest'
-import Emergency from './emergency/Emergency'
+import Checkpoints  from './checkpoints/Checkpoints'
+import Profile from './profile/Profile'
 
 const App = props => {
   return (
@@ -21,19 +17,14 @@ const App = props => {
       <Provider store={store}>
         <Router>
           <div>
-          <div className="logo">
-                    <Logo />
-          </div>  
             {/* public routes */}
             <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/addnotifications" component={AddNotifications} />
             <Route path="/tips" component={Tips} />
-            <Route path="/emergency" component={Emergency} />
-
-            {/* private routes */}
-            {/* <AuthRoute path="/" exact component={Main} /> */}
+            <Route path="/checkpoints" component={Checkpoints} />
+            <Route path="/profile" component={Profile} />
           </div>
         </Router>
       </Provider>
