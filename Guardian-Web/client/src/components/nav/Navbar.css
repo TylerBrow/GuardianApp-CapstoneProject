@@ -6,8 +6,21 @@
 
 #menubuttons button {
     color: white;
-    font-size: 25px;
-    padding: 0 40px;
+    font-size: 20px;
+    padding: 0px 45px;
+    margin-right: 10px;
+    height: 40px;
+    font-weight: bold;
+}
+
+#menubuttons button:hover{
+    background: white;
+    color: rgb(115,57,244);
+}
+
+#menubuttons {
+    margin-top: 10px;
+    margin-left: 120px;
 }
 
 .material-icons {

@@ -32,7 +32,7 @@ class LoginScreen extends React.Component{
   }
 
   handleButtonPress = () => {
-    axios.get('http://10.68.0.117:3001/api/getuser/' + this.state.username).then(resp => {
+    axios.get('http://192.168.0.25:3001/api/getuser/' + this.state.username).then(resp => {
       if(resp.data != ''){
         getNotifications(this.state.username)
         store.dispatch({
@@ -60,9 +60,9 @@ class LoginScreen extends React.Component{
     return(
       <View style={styles.loginContainer}>
       <Header
-            leftComponent={{text: 'Guardian', style:{color: 'white', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
+            leftComponent={{text: 'Guardian', style:{color: 'rgb(115, 57, 244)', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
             leftContainerStyle={{flex: 4}}
-            backgroundColor={ 'rgba(115,57,244,1)'}
+            backgroundColor={ 'rgb(2, 2, 85)'}
             containerStyle={{ borderBottomColor: 'transparent', height: 100}}
           />
         <Input
@@ -90,7 +90,7 @@ class LoginScreen extends React.Component{
 
 const styles = StyleSheet.create({
   loginContainer: {
-    backgroundColor: 'rgba(115,57,244,1)',
+    backgroundColor: 'rgb(2, 2, 85)',
     paddingTop: 10,
     width: '100%',
     height: '100%'

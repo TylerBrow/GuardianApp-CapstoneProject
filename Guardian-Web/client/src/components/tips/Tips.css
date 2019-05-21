@@ -1,13 +1,19 @@
+.main {
+    height: 95vh;
+    overflow: scroll;
+}
+
 .main h2 {
-    color: rgb(85, 48, 196);
+    color: rgb(154, 121, 250);
     font-weight: bolder;
     font-size: 20px;
 }
 
 .advice {
-    width: 70%;
+    width: 80%;
     margin-left: 10%;
     font-size: 18px;
+    color: white;
 }
 
 p {
@@ -17,9 +23,11 @@ p {
 .safety span {
     background-color: rgb(85, 48, 196);
     color: white;
+    border-radius: 3px;
 }
 
 .while span {
     background-color: rgb(85, 48, 196);
     color: white;
+    border-radius: 3px;
 }
