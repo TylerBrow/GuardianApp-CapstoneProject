@@ -15,30 +15,8 @@ body {
     margin-left: 20px;
     margin-right: 20px;
     height: 95vh;
-    border-radius: 5px;
-    /* background-image: url('http://www.cultivatingculture.com/wp-content/uploads/2017/07/Your-Brain-on-Art.jpg');
-    background-repeat: no-repeat;
-    background-size: 120%; */
-    
-    
+    border-radius: 5px;   
 }
-
-/* .notificationreminders {
-    width: 40%;
-    border-right: 3px solid rgb(136, 179, 225);
-    position:relative;
-    text-align: center;
-}
-
-.notificationreminders::after {
-    content:'';
-    position:absolute;
-    top:0;
-    right:0;
-    left:0;
-    bottom:0;
-    border-right:5px solid rgb(178, 165, 218); */
-/* }  */
 
 .googlemap {
     width: 90%;

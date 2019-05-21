@@ -28,11 +28,9 @@ const styles = theme => ({
     border: '1px solid lightblue'
   },
   pink: {
-    // boxShadow: '5px 10px lightblue',
     fontSize: 20,
     margin: '20px 0',
     backgroundColor: '#fff',
-    // backgroundColor: theme.palette.getContrastText(pink[100]),
     color: pink[300],
     width: '80%',
     shadowColor: '#000',
@@ -127,28 +125,6 @@ class NotificationsComponent extends Component {
         </Button>
           ))
         }
-       
-        {/* <Button
-          variant="contained"
-          color="primary"
-          className={classNames(classes.margin, classes.pink)}
-        >
-          
-        </Button><br></br>
-        <MuiThemeProvider theme={theme}>
-          <Button variant="contained" color="primary" className={classes.green}>
-          
-  
-          </Button><br></br> */}
-        {/* </MuiThemeProvider> */}
-        {/* <Button
-          variant="contained"
-          color="primary"
-          disableRipple
-          className={classNames(classes.margin, classes.blue)}
-        >
-        
-        </Button><br></br> */}
       </div>
     );
   }

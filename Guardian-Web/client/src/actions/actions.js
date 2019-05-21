@@ -11,7 +11,6 @@ export function getNotifications(user_id) {
     
     axios.get(`/api/notifications/${user_id}` ).then(resp => {
        let newTime = resp.data.map(item => moment(Number(item.time)).format('LLL'))
-       console.log(resp.data)
         store.dispatch({
             type: 'GET_NOTIFICATIONS',
             notifications: resp.data,
