@@ -3,7 +3,7 @@ import { Provider } from "react-redux"
 // import { BrowserRouter as Router, Route } from "react-router-dom"
 import store from "../../store"
 import "./Main.css"
-import Navbar from '../nav/Navbar'
+// import Navbar from '../nav/Navbar'
 import Notifications from '../notifications/Notifications'
 
 import SimpleMap from '../GoogleMap'
@@ -11,7 +11,6 @@ import SimpleMap from '../GoogleMap'
 
 const Main = props => {
     return (
-        <Provider store={store}>
             <div>
 
                 <div className="homepage">   
@@ -28,7 +27,6 @@ const Main = props => {
                     </div>
                 </div>
             </div>
-        </Provider>
     )
   }
 

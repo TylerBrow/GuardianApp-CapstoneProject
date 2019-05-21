@@ -22,75 +22,174 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { AuthContext } from '../../lib/auth';
 
-const styles = {
-  list: {
-    width: 300, 
-    
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
   },
-  sideList: {
-    width: 'auto',
+  input: {
+    display: 'none',
+  },
+});
 
-  }
-  
-};
-
-class TemporaryDrawer extends React.Component {
-  state = {
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  };
-
-  toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open,
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    const sideList = (
-      <div className={classes.list}>
-        <List>
-            <ListItem>
-            <Link to='/login'><MenuItem className={this.props.classes.tips} onClick={this.handleSignout}>Logout</MenuItem></Link>
-            </ListItem>
-
-        </List>
-      </div>
-    );
-
-    return (
-      <div>
-        <div id="menubuttons">
-        <Button onClick={this.toggleDrawer('right', true)}>Home</Button>
-        <Button onClick={this.toggleDrawer('right', true)}>Alerts</Button>
-        <Button onClick={this.toggleDrawer('right', true)}>Check Points</Button>
-        <Button onClick={this.toggleDrawer('right', true)}>Tips</Button>
-        </div>
-  
-        <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
-          <div className="menudrawers"
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer('right', false)}
-            onKeyDown={this.toggleDrawer('right', false)}
-          >
-            {sideList}
-          </div>
-        </Drawer>
-      </div>
-    );
-  }
+function TextButtons(props) {
+  const { classes } = props;
+  return (
+    <div>
+      <Button href="/" className={classes.button}>
+        Home
+      </Button>
+      <input
+        accept="image/*"
+        className={classes.input}
+        id="text-button-file"
+        multiple
+        type="file"
+      />
+    </div>
+  );
 }
 
-TemporaryDrawer.propTypes = {
+TextButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withStyles(styles)(TextButtons);
+// const styles = theme => ({
+//   button: {
+//     margin: theme.spacing.unit,
+//   },
+//   input: {
+//     display: 'none',
+//   },
+// });
+
+
+// // function TextButtons(props) {
+// //   const { classes } = props;
+
+// class Navbar extends React.Component {
+//   state = {
+//     anchorEl: null,
+//   };
+
+//   handleLink = (url) => {
+//     /* this.props.props.history.push(url) */
+//   };
+
+//   handleClick = event => {
+//     this.setState({ anchorEl: event.currentTarget });
+//   };
+
+//   handleClose = () => {
+//     this.setState({ anchorEl: null });
+//   };
+
+//   handleSignout = (e) => {
+//     window.localStorage.removeItem("authtoken")
+//     console.log("window.localstorage: " + window.localStorage)
+//   }
+
+
+//   render() {
+//     const { anchorEl } = this.state;
+
+//   return (
+//     <div id="menubuttons">
+//       <Button className={this.props.classes.add} onClick={() => this.handleLink('/')}>Home</Button>
+//       <Button className={this.props.classes.add}>Add<br></br>Notifications</Button>
+//       <Button className={this.props.classes.location}>Location Check Points &amp;<br></br>Nearest Emergency Services</Button>
+//       <Button className={this.props.classes.tips}>Tips</Button>
+//       <Button className={this.props.classes.signout}>Logout</Button>
+//     </div>
+//   );
+// }
+// }
+// Navbar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
+
+
+// export default withStyles(styles)(Navbar);
+// const styles = {
+//   list: {
+//     width: 300, 
+    
+//   },
+//   sideList: {
+//     width: 'auto',
+
+//   }
+  
+// };
+
+// class Navbar extends React.Component {
+//   state = {
+//     top: false,
+//     left: false,
+//     bottom: false,
+//     right: false,
+//   };
+
+//   toggleDrawer = (side, open) => () => {
+//     this.setState({
+//       [side]: open,
+//     });
+//   };
+
+//   render() {
+//     const { classes } = this.props;
+
+//     const Home = (
+//       <div className={classes.Home}>
+//         <List>
+//             <ListItem>
+//             <Link to='/login'><MenuItem className={this.props.classes.tips} onClick={this.handleSignout}>Logout</MenuItem></Link>
+//             </ListItem>
+//         </List>
+//       </div>
+//     );
+//     const Alerts = (
+//       <div className={classes.list}>
+//         <List>
+//             <ListItem className={this.props.classes.radius} onClick={this.handleLink}>Radius Alert</ListItem>
+//            <ListItem className={this.props.classes.moved} onClick={this.handleLink}>Haven't Moved Alert</ListItem>
+//            <ListItem className={this.props.classes.low} onClick={this.handleLink}>Low Battery Alert</ListItem>
+//            <ListItem className={this.props.classes.location} onClick={this.handleLink}>Location Check Points Alerts</ListItem>
+//             <ListItem>
+//             <Link to='/login'><MenuItem className={this.props.classes.tips} onClick={this.handleSignout}>Logout</MenuItem></Link>
+//             </ListItem>
+//         </List>
+//       </div>
+//       );
+//     return (
+//       <div>
+//         <div id="menubuttons">
+//         <Button onClick={this.toggleDrawer('right', true)}>Home</Button>
+//         <Button onClick={this.toggleDrawer('right', true)}>Add Notifications</Button>
+//         <Button onClick={this.toggleDrawer('right', true)}>Alerts</Button>
+//         <Button onClick={this.toggleDrawer('right', true)}>Tips</Button>
+//         </div>
+  
+//         <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
+//           <div className="menudrawers"
+//             tabIndex={0}
+//             role="button"
+//             onClick={this.toggleDrawer('right', false)}
+//             onKeyDown={this.toggleDrawer('right', false)}
+//           >
+//             {Home}{Alerts}
+//           </div>
+//         </Drawer>
+//       </div>
+//     );
+//   }
+// }
+
+// Navbar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
+
+// export default withStyles(styles)(Navbar);
 
 
 // class Navbar extends React.Component {

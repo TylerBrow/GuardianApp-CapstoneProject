@@ -30,8 +30,6 @@ const App = props => {
             <Route path="/register" component={Register} />
             <Route path="/addnotifications" component={AddNotifications} />
             <Route path="/tips" component={Tips} />
-            <Route path="/main" component={Main} />
-            <Route path="/home" component={Test} />
             <Route path="/emergency" component={Emergency} />
 
             {/* private routes */}
