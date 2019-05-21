@@ -3,18 +3,14 @@ import Notifications from '../notifications/Notifications'
 import '../notifications/Notifications.css'
 import '../main/Main.css'
 import '../nav/Navbar.css'
-import Actiontest from '../actiontest'
-import '../addNotifications/AddNotifications.css'
+import '../notifications/Notifications'
 import Logo from '../logo/Logo'
-import '../logo/Logo.css'
 
-class AddNotifications extends React.Component {
+class Checkpoints extends React.Component {
     render() {
         return (
             <div>
-                <div className="logo">
-                    <Logo />
-                </div>  
+              <Logo />
 
                 <div className="homepage">   
                     <div className="notificationreminders">
@@ -23,15 +19,13 @@ class AddNotifications extends React.Component {
                     </div>
 
                     <div className="main">
-                        <h1>Add Notifications</h1>
-                        <div>
-                            <Actiontest />
-                        </div>
+                        <h1>Contact Nearest Emergency Services</h1>
                     </div>          
                 </div>
-            </div>    
+            </div>
+            
         )
     }
 }
 
-export default AddNotifications
+export default Checkpoints

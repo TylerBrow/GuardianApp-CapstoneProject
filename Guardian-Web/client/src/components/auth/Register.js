@@ -1,14 +1,11 @@
 import React, { useState, useContext } from "react"
-import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import { AuthContext } from "../../lib/auth"
-import './Register.css'
 
 const Register = props => {
   const [username, setUsername] = useState("")
@@ -41,9 +38,6 @@ const Register = props => {
     <div className="login">
       <Paper className="pad">
         <div className="loginIcon">
-          <Avatar>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
           <span className="name">Guardian</span> Registration
           </Typography>
@@ -86,7 +80,7 @@ const Register = props => {
             type="submit"
             fullWidth
             variant="contained"
-            color="secondary"
+            color="primary"
           >
             Register
           </Button>

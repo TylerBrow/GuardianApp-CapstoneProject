@@ -1,10 +1,8 @@
 .notificationreminders {
     width: 40%;
-    /* border-right: 3px solid rgb(136, 179, 225); */
     position:relative;
     text-align: center;
     height: 90vh;
-    /* border: 5px solid rgb(115,57,244); */
     border-radius: 5px;
     overflow: scroll;
     margin-left: 20px;
@@ -19,7 +17,6 @@
     right:0;
     left:0;
     bottom:0;
-    /* border-right:5px solid rgb(178, 165, 218); */
     height: 100vh;
 }
 
@@ -27,6 +24,5 @@
     font-weight: bolder;
     font-size: 32px;
     line-height: 100px;
-    color: white;
-    
+    color: white;    
 }
