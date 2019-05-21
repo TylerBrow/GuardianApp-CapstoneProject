@@ -4,8 +4,6 @@
     text-align: left;
     position: relative;
     display: inline-block;
-    /* background-color: rgb(115,57,244);
-    background-image: linear-gradient(rgb(115,57,244),rgb(115,57,204)); */
 }
 
 .logo h1 {
@@ -16,8 +14,5 @@
     font-size: 40px;
     font-family: "Merienda";
     font-weight: bolder;
-    /* border-bottom: 5px solid lightblue; */
-    bottom: 10px;
-    border-radius: 50%
 }
 
