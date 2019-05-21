@@ -32,15 +32,24 @@ const Test = (props) => {
     <div>
       <form className="notificationsform" onSubmit={handleSubmit}>
           <select onChange={e => setCategory(e.target.value)}>
-            <option>Choose an Option</option>
+            <option>Choose Reminder Category</option>
             <option value='Health'>Health</option>
             <option value='Social'>Social</option>
             <option value='Tasks'>Tasks</option>
             <option value='Custom'>Custom</option>
           </select>
-          <input type='text' placeholder='message' onChange={e => setMessage(e.target.value)} maxLength='30' />
+          <label className="inputfield">
+            Reminder
+          <input type='text' placeholder='Add reminder' maxLength= '30' onChange={e => setMessage(e.target.value)} />
+          </label>
+          <label className="inputfield">
+            Date
           <input type='date' placeholder='date' onChange={e => setDate(e.target.value)} />
+          </label>
+          <label className="inputfield">
+            Time
           <input type='time' onChange={e => setTime(e.target.value)} />
+          </label>
           <button>Submit</button>
       </form>
       {/* <div>

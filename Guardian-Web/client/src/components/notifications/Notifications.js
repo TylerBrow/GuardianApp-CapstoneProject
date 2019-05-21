@@ -28,17 +28,17 @@ const styles = theme => ({
     border: '1px solid lightblue'
   },
   pink: {
-    boxShadow: '5px 10px lightblue',
+    // boxShadow: '5px 10px lightblue',
     fontSize: 20,
     margin: '20px 0',
-    backgroundColor: 'rgb(115,57,244)',
+    backgroundColor: '#fff',
     // backgroundColor: theme.palette.getContrastText(pink[100]),
-    color: pink[100],
+    color: pink[300],
     width: '80%',
-    border: '1px solid lightblue',
-    '&:hover': {
-      backgroundColor: pink[700],
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2
   },
   blue: {
     boxShadow: '5px 10px lightblue',
@@ -128,7 +128,7 @@ class NotificationsComponent extends Component {
           ))
         }
        
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           className={classNames(classes.margin, classes.pink)}
@@ -139,16 +139,16 @@ class NotificationsComponent extends Component {
           <Button variant="contained" color="primary" className={classes.green}>
           
   
-          </Button><br></br>
-        </MuiThemeProvider>
-        <Button
+          </Button><br></br> */}
+        {/* </MuiThemeProvider> */}
+        {/* <Button
           variant="contained"
           color="primary"
           disableRipple
           className={classNames(classes.margin, classes.blue)}
         >
         
-        </Button><br></br>
+        </Button><br></br> */}
       </div>
     );
   }
