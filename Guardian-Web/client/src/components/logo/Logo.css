@@ -8,11 +8,13 @@
 
 .logo h1 {
     width: 140px;
-    color: rgb(115,57,244);
     margin-top: 0px;
     margin-left: 20px;
     font-size: 40px;
     font-family: "Merienda";
     font-weight: bolder;
 }
-
+.logo a {
+    text-decoration: none;
+    color: rgb(115,57,244);
+}
