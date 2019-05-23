@@ -10,6 +10,11 @@
     height: 65vh;
 }
 
+.notificationsform .select {
+    font-size: 35px;
+    color: red;
+}
+
 .notificationsform .inputfield {
     display: flex;
     flex-direction: column;
