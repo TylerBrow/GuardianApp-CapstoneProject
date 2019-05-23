@@ -161,7 +161,14 @@ router.get('/gettinggeofence/:user', (req, res, next) => {
   })
 })
 
+router.post('/geofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `INSERT INTO geofences (user_id, geofence) VALUES (?, true)`
 
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
 
 module.exports = router;
 
