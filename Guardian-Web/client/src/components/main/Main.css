@@ -27,3 +27,30 @@ body {
     margin:auto;
     box-shadow: '#000';
 }
+
+/* .homepage h1 {
+    font-weight: bolder;
+    font-size: 25px;
+    line-height: 100px;
+    color: rgb(115, 57, 244, 1);
+    
+} */
+
+.main h1 {
+    font-weight: bolder;
+    font-size: 25px;
+    line-height: 100px;
+    color: rgb(115, 57, 244, 1);
+    
+}
+.marker {
+    width: 12px;
+    opacity: .8;
+    color: purple;
+}
+
+/* .navdiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+} */
