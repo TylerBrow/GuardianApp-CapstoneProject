@@ -1,0 +1,72 @@
+#profileform {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+#profileform input {
+    width: 60%;
+    padding: 12px;
+    font-size: 20px;
+    border: rgb(115,57,204) 3px solid;
+    border-radius: 3px;
+    outline: none;
+    margin: 2px auto;
+}
+
+#profileform input:hover {
+    border-color: rgb(83, 41, 145);
+    background-color: rgba(115,57,204, .1);
+    cursor: pointer;
+}
+
+#profileform select {
+    width: 40%;
+    height: 40px;
+    padding: 20px;
+    margin: 20px auto;
+    font-size: 20px;
+    background-color:rgb(115,57,204);
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+#profileform button {
+    width: 30%;
+    padding: 10px;
+    margin: 20px auto;
+    background-color:rgb(115,57,204);
+    color: white;
+    font-size: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#profileform button:hover {
+    background-color: rgb(91, 44, 161);
+}
+
+#profileform label {
+    font-size: 25px;
+    padding: 20px;
+}
+
+#profileform fieldset {
+    margin-top: 20px;
+}
+
+.select label {
+    margin: 0;
+    padding: 0;
+}
+
+.selectoption select {
+    margin: 0;
+    padding: 0;
+}

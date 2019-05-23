@@ -30,3 +30,16 @@ export function getCoord() {
         })
     })
 }
+
+export function setProfile(profile) {
+    return axios.post('/api/profile', profile)
+}
+
+export function getProfile() {
+    axios.get('/api/profile').then(resp => {
+        store.dispatch({
+            type: 'GET_PROFILE',
+            profile: resp.data
+        })
+    })
+}
