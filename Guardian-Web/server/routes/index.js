@@ -38,6 +38,23 @@ router.post("/register", (req, res, next) => {
  })
 })
 
+router.post("/profile", (req, res, next) => {
+  const user = req.body.user
+  const name = req.body.name
+  const address = req.body.address
+  const radius = req.body.radius
+
+  const sql = "INSERT INTO profile (user_id, name, address, radius) VALUES (?, ?, ?, ?)"
+
+  pool.query(sql, [user, name, address, radius], (err, results, fields) => {
+    const profile_id = results.insertId
+
+    res.json({
+      profile_id: profile_id
+    })
+  })
+})
+
 router.post("/login", (req, res, next) => {
  const username = req.body.username
  const password = sha512(req.body.password + config.get("salt"))

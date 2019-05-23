@@ -17,51 +17,56 @@ class Tips extends React.Component {
                         <Notifications />
                     </div>
 
-                    <div className="main">
+                    <div className="tipsmain">
+                    <h1>Tips &amp; Advice for Alzheimer's</h1>
                         <div className="advice">
-                        <h1>Tips &amp; Advice for Alzheimer's</h1>
+                        
                         <p className="safety">
-                            <span>Safety first:</span> there an immediate safety risk for the person with dementia to perform this task alone? If there is no immediate risk of injury or harm, provide encouragement and continue to provide supervision as necessary.<br></br><br></br>
-                            
-                            <span>Avoid stress:</span> Prioritize tasks or actions that do not cause unnecessary stress for the person with dementia. For example, if you know that grocery shopping will be frustrating for the person with dementia, ask for their participation to outline a weekly menu and organize a grocery list.<br></br><br></br>
-                            
-                            <span>Make a positive assumption:</span> Assume that the person with dementia is capable of completing the task. If you sense frustration, try to identify the cause of the frustration before intervening. Focus on his or her current needs, rather than dwelling on the future.<br></br><br></br>
-                            
-                            <span>Create a help signal:</span> Identify a cue or phrase that you can use to confirm if the person with dementia is comfortable receiving support. For example, you may agree to use a phrase like, “Is there anything I can do to help?” or a nod to signal that it’s ok to chime in if the person with dementia is having difficulty remembering a word or name.<br></br><br></br>
-                            
-                            <span>Talk it over:</span> The best way to determine how and when to provide support is to ask directly. Ask the person with dementia what they need or the frustrations they may be experiencing. Talk about it, then make a plan.<br></br><br></br>
-                            
-                            <span>Work better together:</span> Find activities to do together and keep the conversation going about expectations for how you will provide support. Check in regularly by asking the person with dementia if you are providing a level of assistance that is comfortable or adequate.</p><br></br>
+                        If you are caring for someone with Alzheimer's disease or a related dementia, your role in managing daily tasks will increase as the disease progresses. 
+                        Consider practical tips that can help the person with dementia participate as much as possible and enable you to manage tasks effectively.<br></br>
 
-                            <h2>Maximizing independence</h2><br></br>
-                            
-                            <p className="while">While every person experiences the early stage of dementia differently, it is common that a person in the early-stage may need cues and reminders to help with memory. As a care partner, it may be necessary for you to take the initiative to determine how you may be able to help. For example, he or she may need help with:<br></br><br></br>
+                        <h2>Reduce frustrations:</h2>
+                        A person with dementia might become agitated when once-simple tasks become difficult. To limit challenges and ease frustration:<br></br><br></br>
+
+                        Schedule wisely...<br></br>Establish a daily routine. Some tasks, such as bathing or medical appointments, are easier when the person is most alert and refreshed. Allow some flexibility for spontaneous activities or particularly difficult days.<br></br>
+                        
+                        Take your time...<br></br>Anticipate that tasks may take longer than they used to and schedule more time for them. Allow time for breaks during tasks.<br></br>
+
+                        Involve the person...<br></br>Allow the person with dementia to do as much as possible with the least amount of assistance. For example, he or she might be able to set the table with the help of visual cues or dress independently if you lay out clothes in the order they go on.<br></br>
+
+                        Provide choices...<br></br>Provide some, but not too many, choices every day. For example, provide two outfits to choose from, ask if he or she prefers a hot or cold beverage, or ask if he or she would rather go for a walk or see a movie.<br></br>
+
+                        Provide simple instructions...<br></br>People with dementia best understand clear, one-step communication.<br></br>
+
+                        Limit napping...<br></br>Avoid multiple or prolonged naps during the day. This can minimize the risk of getting days and nights reversed.<br></br>
+
+                        Reduce distractions...<br></br>Turn off the TV and minimize other distractions at mealtime and during conversations to make it easier for the person with dementia to focus.<br></br>
+                        
+                        <h2>Tips:</h2>
+                        While every person experiences the early stage of dementia differently, it is common that a person in the early-stage may need cues and reminders to help with memory. As a care partner, it may be necessary for you to take the initiative to determine how you may be able to help. For example, he or she may need help with:<br></br><br></br>
  
-                            <span>Keeping appointments</span><br></br>
-                            <span>Remembering words or names</span><br></br>
-                            <span>Recalling familiar places or people</span><br></br>
-                            <span>Managing money</span><br></br>
-                            <span>Keeping track of medications</span><br></br>
-                            <span>Planning or organizing</span><br></br>
-                            <span>Transportation</span><br></br><br></br>
-                            Focus on the person's strengths and how they can remain as independent as possible, and establish a strong channel of communication. Consider ways to work together as a team. For example, if they are still comfortable balancing a checkbook, you may offer to provide a final review.</p><br></br>
+                        Keeping appointments<br></br>
+                        Remembering words or names<br></br>
+                        Recalling familiar places or people<br></br>
+                        Managing money<br></br>
+                        Keeping track of medications<br></br>
+                        Planning or organizing<br></br>
+                        Transportation<br></br><br></br>
+                        Focus on the person's strengths and how they can remain as independent as possible, and establish a strong channel of communication. Consider ways to work together as a team. For example, if they are still comfortable balancing a checkbook, you may offer to provide a final review.
 
-                            <h2>Here are tips on how to maintain your own health:</h2><br></br>
+                        <h2>Challenges of Alzheimer’s care:</h2>
+                        
+                        Overwhelming emotions as capabilities lessen<br></br>
+                        Fatigue and exhaustion as caregiving demands increase.<br></br>
+                        Isolation and loneliness as independence disappears.<br></br>
+                        Financial and work complications as costs rise and resources are challenged.<br></br>
+                        
+                        <h2>Rewards of Alzheimer’s care:</h2>
 
-                            <p>Think about ways you can get support now. For example, include an afternoon to yourself in your monthly schedule. <br></br>
-                            Ask others to visit or go to lunch with the person living with dementia while you're away.<br></br>
-                            Build a support network. Creating a support system before you think you need it will minimize your stress as the disease progresses. Look at current support systems you have already in place and consider the people you turn to most often in times of need.<br></br>
-                            Connect with other care partners to acquire encouragement and comfort from others who understand what you're going through. Learn more about in-person and online support groups.<br></br>
-                            Ask for and accept help. Care partners often wait too long before asking for help from others.<br></br>
-                            Rest when needed and allow time for yourself and your own interests.<br></br>
-                            Try not to take things personally; symptoms of the disease can cause an individual to forget events or commitments. Remember this is not a reflection of his or her character.<br></br>
-                            Stay healthy through diet, exercise and regular visits to the doctor.<br></br>
-                            Stay engaged by continuing to be involved in activities that are important to you and enhance your sense of wellbeing.<br></br>
-                            Allow yourself the opportunity to laugh when funny situations arise.<br></br><br></br>
-                            Learn more: Care Partner Support Groups, Changing Roles in Relationships, Online Community<br></br>
-
-                            Getting empowered with information and resources<br></br>
-                            The more you educate yourself about the disease the more confident and prepared you may feel about the future and your ability to solve problems as the disease progresses. Knowing what to expect and putting plans in place can be empowering for you and the person with dementia.</p>
+                        Bonds deepen through care, companionship, and service.<br></br>
+                        Problem solving and relationship skills grow through experience.<br></br>
+                        New relationships form through education and support.<br></br>
+                        Unexpected rewards develop through compassion and acceptance.<br></br></p>
                         </div>
                     </div>
                 </div>
