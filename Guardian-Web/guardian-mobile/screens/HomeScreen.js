@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserLocation, getNotifications } from '../actions/actions'
+import { getUserLocation, getNotifications, sendCheckpoint, getGeofence, geoFencing } from '../actions/actions'
 
 import { ListItem, Header, Icon, Button } from 'react-native-elements'
 
@@ -32,10 +32,12 @@ import {
   };
 
   state = {
-    userLocation: null
+    userLocation: null,
+    timestamp: null,
+    geoLat: null,
+    geoLng: null,
   }
  
-    //this is the function that will be in onGetLocation
     setUserLocation = () => {
       navigator.geolocation.getCurrentPosition(position => {
       this.setState({
@@ -43,17 +45,40 @@ import {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-          }
+          longitudeDelta: 0.0421
+          },
+          timestamp: position.timestamp
         })
+        sendCheckpoint(this.state.timestamp, this.props.userId)
       })
     }
 
     componentDidMount() {
       this._getLocationAsync()
       this.load()
-
       this.gettingUser()
+      // this.geo()
+    }
+
+    componentWillMount(){
+      getGeofence()
+    }
+
+    componentWillReceiveProps(){
+      this.geo()
+    }
+    
+    geo = async () => {
+      await Location.geocodeAsync(this.props.address).then(position => {
+        position.map(item => {
+          this.setState({
+            latitude: item.latitude,
+            longitude: item.longitude
+          })
+        })
+        console.log('lat', this.state.latitude, 'lng', this.state.longitude)
+        console.log(this.props.radius)
+      })
     }
 
     load = async () => {
@@ -85,9 +110,9 @@ import {
           errorMessage: 'Permission to access location was denied',
         });
       }
-      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 8000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
+      await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 10000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
 
-      await Location.startGeofencingAsync('geofence', [{latitude: 36, longitude: -115.46566, radius: 1, notifyOnExit: true}])
+      await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
 
       const { status: existingStatus } = await Permissions.getAsync(
           Permissions.NOTIFICATIONS
@@ -105,20 +130,35 @@ import {
 
     handleLogout = () => {
       const user = AsyncStorage.removeItem('user')
-      console.log(user)
       this.props.navigation.navigate('Login')
+      this.setState({
+        latitude: '',
+        longitude: ''
+      })
     }
 
   render() {
     return (
       <SafeAreaView>
         <ScrollView style={styles.viewContainer}>
-      {/* you add the className as a prop example above */}
           <Header
             leftComponent={{text: 'Guardian', style:{color: 'rgb(115, 57, 244)', fontSize: 30, marginLeft: 10, fontFamily:'Merienda-bold'}}}
             leftContainerStyle={{flex: 3}}
             backgroundColor={ '#fff'}
             containerStyle={{ borderBottomColor: '#fff'}}
+            rightComponent={<Button
+              title= 'LOGOUT'
+              type='solid'
+              raised= {true}
+              buttonStyle={{width: 125, height: 40, backgroundColor: 'rgb(115, 57, 244)', shadowColor: '#000',
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 0.6,
+              shadowRadius: 2,
+              elevation: 5}}
+              titleStyle={{color: 'white', fontSize: 20}}
+              containerStyle={{width: 125, height: 40, marginRight: '15%'}}
+              onPress={this.handleLogout}
+            />}
           />
           <LinearGradient colors={['rgb(2, 2, 85)', 'rgb(2, 2, 85)']} style={{margin: 15, height: 150, borderWidth: 1,
             borderColor: 'transparent',
@@ -135,12 +175,12 @@ import {
             leftContainerStyle={{flex: 4}}
             backgroundColor={ 'transparent'}
             containerStyle={{ marginTop: -10, paddingTop: 0, paddingRight: 20, backgroundColor: 'transparent', height: 150, paddingTop: 0}}
-            rightComponent={{icon: 'place', color: '#fff', size: 60, style:{marginRight: 20, marginTop: 0, paddingTop: 0, onPress:{}}}}
+            rightComponent={{icon: 'place', color: '#fff', size: 60, underlayColor:'rgb(2, 2, 85)', onPress: this.setUserLocation, style:{marginRight: 20, marginTop: 0, paddingTop: 0}}}
             rightContainerStyle={{flex: 2}}
           />
           </LinearGradient>
           <View style={styles.itemListContainer}>
-            <ListItem 
+            <ListItem
             style={[styles.listItem]}
               key="item-1"
               leftIcon={
@@ -163,76 +203,43 @@ import {
               key = {"key-"+ i}
               style={styles.listItem}
               leftIcon={
+                item.category == 'Health'?
               <Icon 
                 name="stethoscope"
                 type="font-awesome"
                 color="#fc7b9b"
                 size= {55}
-                />}
-              title= {item.message}
-              titleStyle={{fontSize: 27, fontWeight: '900', color:"#fc7b9b"}}
-              subtitle= {moment(Number(item.time)).format('LLL')}
-              subtitleStyle={{fontSize: 20}}
-            /> 
-            ))
-            }
-            <ListItem 
-              style={styles.listItem}
-              key="item-3"
-              leftIcon={
+                /> 
+              : item.category == 'Social'?
               <Icon 
                 name="group"
                 type="material-icon"
                 color="#4f8ff7"
                 size= {55}
                 /> 
-              }
-              title="Meeting"
-              titleStyle={{fontSize: 28, fontWeight: '900', color:"#4f8ff7"}}
-              subtitle="May 28, 2019 2:30 PM"
-              subtitleStyle={{fontSize: 20}}
-            /> 
-            <ListItem 
-              style={styles.listItem}
-              key="item-4"
-              leftIcon={
-              <Icon 
+                : item.category == 'Tasks'?
+                <Icon 
                 name="event-note"
                 type="material-icon"
                 color="#86e884"
                 size= {55}
-                /> 
-              }
-              title="Clean Kitchen"
-              titleStyle={{fontSize: 28, fontWeight: '900', color: '#86e884'}}
-              subtitle="May 30, 2019 10:30 AM"
-              subtitleStyle={{fontSize: 20}}
-            />
-            <ListItem 
-              style={styles.listItem}
-              key="item-5"
-              leftIcon={
-              <Icon 
-                name="address-book"
-                type="font-awesome"
+                /> :
+                item.category == 'Custom'?
+                <Icon 
+                name="favorite-border"
+                type="material-icon"
+                color="rgb(255, 174, 68)"
                 size= {55}
-                /> 
+                /> : ''
               }
-              title="Meeting"
-              titleStyle={{fontSize: 28, fontWeight: '900'}}
-              subtitle="May 28, 2019 2:30 PM"
+              title= {item.message}
+              titleStyle={[{fontSize: 27, fontWeight: '900'}, styles[item.category]]}
+              subtitle= {moment(Number(item.time)).format('LLL')}
               subtitleStyle={{fontSize: 20}}
-            />
+            /> 
+            ))
+            }
         </View>
-        <Button
-          title= 'Logout'
-          type='solid'
-          raised= {true}
-          buttonStyle={{width: 300, height: 65, backgroundColor: 'white'}}
-          titleStyle={{color: 'black', fontSize: 30}}
-          containerStyle={{width: 300, height: 65, marginLeft: '15%', marginBottom: 20}}
-          onPress={this.handleLogout}
-        />
       </ScrollView>
     </SafeAreaView>
     );
@@ -242,7 +249,9 @@ import {
 function mapStateToProps(appState) {
   return {
     notifications: appState.notifications,
-    userId: appState.user
+    userId: appState.user,
+    address: appState.address,
+    radius: appState.radius
   }
 }
 
@@ -251,7 +260,6 @@ export default connect(mapStateToProps)(HomeScreen)
 TaskManager.defineTask('currentLoc', ({ data, error }) => {
   if (error) {
     console.log("Error!", error.message)
-    // check `error.message` for more details.
     return;
   }
   if (data){
@@ -263,6 +271,7 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
         user = await AsyncStorage.getItem('user')
         getNotifications(user)
         getUserLocation(locations, user)
+        getGeofence(user)
         console.log(user)
       } catch (e) {
         console.error('Failed to load name.')
@@ -276,13 +285,25 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
 
 TaskManager.defineTask('geofence', ({ data: { eventType, region }, error }) => {
   if (error) {
-    // check `error.message` for more details.
     return;
   }
   if(region){
-    console.log(region)
+    // console.log(region)
   }
   if (eventType === Location.GeofencingEventType.Exit) {
+    const load = async () => {
+      let user = ''
+      try {
+        user = await AsyncStorage.getItem('user')
+        geoFencing(user)
+      } catch (e) {
+        console.error('Failed to load name.')
+      }
+      return user;
+    }
+
+    load()
+
     console.log("You've left region:", region);
   }
 })
@@ -310,17 +331,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 10,
-    height: 130,
+    height: 140,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.6,
     shadowRadius: 2,
     elevation: 5
+  },
+  Health: {
+    color: '#fc7b9b'
+  },
+  Social: {
+    color: '#4f8ff7'
+  },
+  Tasks: {
+    color: '#86e884'
+  },
+  Custom: {
+    color: 'rgb(255, 174, 68)'
   }
-});
-
-// rgb(246,247,249)
-
-// borderBottomWidth: 3,
-// borderBottomLeftRadius: 29,
-// borderBottomRightRadius: 29, borderBottomColor: 'lightblue', borderWidth: 0.5, borderRightColor: 'transparent', borderLeftColor: 'transparent', borderTopColor: 'transparent'
+})

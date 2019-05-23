@@ -38,6 +38,23 @@ router.post("/register", (req, res, next) => {
  })
 })
 
+router.post("/profile", (req, res, next) => {
+  const user = req.body.user
+  const name = req.body.name
+  const address = req.body.address
+  const radius = req.body.radius
+
+  const sql = "INSERT INTO profile (user_id, name, address, radius) VALUES (?, ?, ?, ?)"
+
+  pool.query(sql, [user, name, address, radius], (err, results, fields) => {
+    const profile_id = results.insertId
+
+    res.json({
+      profile_id: profile_id
+    })
+  })
+})
+
 router.post("/login", (req, res, next) => {
  const username = req.body.username
  const password = sha512(req.body.password + config.get("salt"))
@@ -131,9 +148,24 @@ router.get('/maps', (req, res, next) => {
 })
 
 
+router.post('/checkin/:user', (req, res, next) => {
+  const userId = req.params.user
+  const timestamp = req.body.timestamp
+  const sql = `INSERT INTO checkins (user_id, timestamp) VALUES (?,?)`
+
+  pool.query(sql, [userId, timestamp], (err, results, fields) => {
+    res.json({
+      userId: userId,
+      timestamp: timestamp
+    })
+  })
+})
+
+
 router.get('/checkin/:user', (req, res, next) => {
   const userId = req.params.user
   const sql = `SELECT timestamp FROM checkins WHERE user_id = ?`
+
  
   pool.query(sql, [userId], (err, results, fields) => {
     res.json(results)
@@ -144,11 +176,31 @@ router.get('/geofence/:user', (req, res, next) => {
   const userId = req.params.user
   const sql = 'SELECT geofence FROM geofences WHERE user_id = ?'
 
+
   pool.query(sql, [userId], (err, results, fields) => {
     res.json(results)
   })
 })
 
+router.get('/gettinggeofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `SELECT address, radius FROM profiles WHERE user_id = ?`
+
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+
+router.post('/geofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `INSERT INTO geofences (user_id, geofence) VALUES (?, true)`
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
 
 
 module.exports = router;

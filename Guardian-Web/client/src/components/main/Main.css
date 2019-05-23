@@ -1,12 +1,13 @@
 body {
     height: 100%;
-    background-color: rgb(2, 2, 85)
+    background-color: rgb(2, 2, 85);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .homepage {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 95vh;
 }
 
 .main {
@@ -15,7 +16,7 @@ body {
     margin-left: 20px;
     margin-right: 20px;
     height: 95vh;
-    border-radius: 5px;   
+    border-radius: 5px;
 }
 
 .googlemap {

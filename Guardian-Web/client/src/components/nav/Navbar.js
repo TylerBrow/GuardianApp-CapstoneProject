@@ -9,6 +9,28 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     color: 'white',
+    fontSize: 18,
+    padding: '0px 20px',
+    marginRight: 10,
+    height: 40,
+    fontWeight: 'bold',
+    "&:hover": {
+      backgroundColor: "#fff",
+      color: 'rgb(115,57,244)'
+    }
+  },
+  logout: {
+    margin: theme.spacing.unit,
+    color: 'white',
+    fontSize: 18,
+    padding: '0px 20px',
+    marginRight: 10,
+    height: 40,
+    fontWeight: 'bold',
+    "&:hover": {
+      backgroundColor: "rgb(115,57,244)",
+      color: '#fff'
+    }
   },
   input: {
     display: 'none',
@@ -18,7 +40,7 @@ const styles = theme => ({
 function TextButtons(props) {
   const { classes } = props;
   return (
-    <div>
+    <div className="navbar">
       <Button href="/" className={classes.button}>
         Home
       </Button>
@@ -74,7 +96,7 @@ function TextButtons(props) {
         type="file"
       />
 
-      <Button href="/login" className={classes.button}>
+      <Button href="/login" className={classes.logout}>
         Logout
       </Button>
       <input
