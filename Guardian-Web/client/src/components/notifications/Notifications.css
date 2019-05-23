@@ -6,7 +6,7 @@
     border-radius: 5px;
     overflow: scroll;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     background: linear-gradient(87deg,#825ee4 0,#5e72e4 100%);
 }
 
@@ -24,5 +24,12 @@
     font-weight: bolder;
     font-size: 32px;
     line-height: 100px;
-    color: white;    
+    color: white; 
+    margin: 0;   
+}
+
+.date-time {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
 }

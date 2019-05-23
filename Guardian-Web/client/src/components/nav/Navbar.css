@@ -4,16 +4,7 @@
     left: 25%;
 }
 
-/* #menubuttons button {
-    color: white;
-    font-size: 20px;
-    padding: 0px 45px;
-    margin-right: 10px;
-    height: 40px;
-    font-weight: bold;
-} */
-
-/* #menubuttons button:hover{
-    background: white;
-    color: rgb(115,57,244);
-} */
+.navbar {
+    margin-left: 250px;
+    width: 80%;
+}

@@ -1,6 +1,5 @@
 .main {
     height: 95vh;
-    overflow: scroll;
 }
 
 .main h2 {
@@ -12,8 +11,10 @@
 .advice {
     width: 80%;
     margin-left: 10%;
+    height: 95vh;
     font-size: 18px;
     color: white;
+    overflow: scroll;
 }
 
 p {

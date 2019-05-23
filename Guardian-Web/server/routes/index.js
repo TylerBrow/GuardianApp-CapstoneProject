@@ -130,6 +130,46 @@ router.get('/maps', (req, res, next) => {
   })
 })
 
+router.post('/checkin/:user', (req, res, next) => {
+  const userId = req.params.user
+  const timestamp = req.body.timestamp
+  const sql = `INSERT INTO checkins (user_id, timestamp) VALUES (?,?)`
+
+  pool.query(sql, [userId, timestamp], (err, results, fields) => {
+    res.json({
+      userId: userId,
+      timestamp: timestamp
+    })
+  })
+})
+
+router.get('/checkin/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `SELECT timestamp FROM checkins WHERE user_id = ?`
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+router.get('/gettinggeofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `SELECT address, radius FROM profiles WHERE user_id = ?`
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+router.post('/geofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `INSERT INTO geofences (user_id, geofence) VALUES (?, true)`
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
 module.exports = router;
 
 

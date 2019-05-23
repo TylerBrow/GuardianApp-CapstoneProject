@@ -6,28 +6,22 @@ import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
-import blue from '@material-ui/core/colors/blue'
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
 import './Notifications.css'
 import {getNotifications} from '../../actions/actions';
 import { getUserID } from '../../lib/auth';
 import { decode } from "jsonwebtoken"
 import moment from 'moment'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GroupIcon from '@material-ui/icons/Group'
+import EventNoteIcon from '@material-ui/icons/EventNote'
 
 const styles = theme => ({
   margin: {
     margin: theme.spacing.unit,
   },
-  green: {
-    boxShadow: '5px 10px lightblue',
-    fontSize: 27,
-    backgroundColor: 'rgb(115,57,244)',
-    color: green[100],
-    width: '80%',
-    margin: '20px 0',
-    border: '1px solid lightblue'
-  },
-  pink: {
+  Health: {
     fontSize: 20,
     margin: '20px 0',
     backgroundColor: '#fff',
@@ -36,44 +30,54 @@ const styles = theme => ({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
-    shadowRadius: 2
+    shadowRadius: 2,
+    "&:hover": {
+      backgroundColor: "#fff"
+    }
   },
-  blue: {
-    boxShadow: '5px 10px lightblue',
-    textTransform: 'uppercase',
-    fontSize: 27,
+  Social: {
+    fontSize: 20,
     margin: '20px 0',
+    backgroundColor: '#fff',
+    color: blue[300],
     width: '80%',
-    padding: '6px 12px',
-    backgroundColor: 'rgb(115,57,244)',
-    color: blue[100],
-    border: '1px solid lightblue',
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:hover': {
-      backgroundColor: '#0069d9',
-      borderColor: '#0062cc',
-    },
-    '&:active': {
-      boxShadow: 'none',
-      backgroundColor: '#0062cc',
-      borderColor: '#005cbf',
-    },
-    '&:focus': {
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-    },
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    "&:hover": {
+      backgroundColor: "#fff"
+    }
   },
-});
+  Tasks: {
+    fontSize: 20,
+    margin: '20px 0',
+    backgroundColor: '#fff',
+    color: green[300],
+    width: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    "&:hover": {
+      backgroundColor: "#fff"
+    }
+  },
+  Custom: {
+    fontSize: 20,
+    margin: '20px 0',
+    backgroundColor: '#fff',
+    color: orange[300],
+    width: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    "&:hover": {
+      backgroundColor: "#fff"
+  }
+  }
+})
 
 
 
@@ -104,24 +108,35 @@ class NotificationsComponent extends Component {
   
   CustomizedButtons(props) {
     const { classes } = props;
-
-    
   
     return (
       <div className="reminders">
-
         {
-          
           this.props.notifications.map((item, i) => (
-            
         <Button
           variant="contained"
-          color="primary"
-          className={classNames(classes.margin, classes.pink)}
+          color= 'white'
+          className={classNames(classes.margin, classes[item.category])}
           key = {'key' + i}
         >
-         {item.message}<br></br>
-         {moment(Number(item.time)).format('LLL')}
+          { item.category === 'Health' ?
+          <FontAwesomeIcon
+            icon="stethoscope"
+            size="2x"
+          />: item.category === 'Social'?
+          <GroupIcon style={{ fontSize: 50 }}/>
+          : item.category === 'Tasks'?
+          <EventNoteIcon style={{ fontSize: 50 }}/>
+          : item.category === 'Custom'?
+          <FontAwesomeIcon
+            icon="hand-holding-heart"
+            size="2x"
+          />:''
+          }
+          <div className="date-time">
+         <span>{item.message}</span>
+         <span>{moment(Number(item.time)).format('LLL')}</span>
+         </div>
         </Button>
           ))
         }
@@ -135,6 +150,7 @@ NotificationsComponent .propTypes = {
 };
 
 function mapStateToProps(appState) {
+  console.log(appState)
   return {
      notifications: appState.notifications,
      newTime: appState.newTime

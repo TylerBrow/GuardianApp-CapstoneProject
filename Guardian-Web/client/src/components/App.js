@@ -11,6 +11,11 @@ import Tips from './tips/Tips'
 import Checkpoints  from './checkpoints/Checkpoints'
 import Profile from './profile/Profile'
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStethoscope, faKey, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStethoscope, faHandHoldingHeart, faKey);
+
 const App = props => {
   return (
     <AuthProvider>
