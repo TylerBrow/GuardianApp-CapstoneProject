@@ -1,6 +1,8 @@
 const initialState = {
   notifications: [],
-  user: ''
+  user: '',
+  address: '',
+  radius: ''
 }
 
 export default function (state = initialState, action) {
@@ -9,6 +11,8 @@ export default function (state = initialState, action) {
      return {...state, notifications: action.payload}
     case 'SEND_USER':
       return {...state, user: action.payload}
+    case 'GET_GEOFENCE_INFO':
+        return {...state, address: action.address, radius: action.radius}
     default:
       return state
   }

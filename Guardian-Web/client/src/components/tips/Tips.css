@@ -1,7 +1,9 @@
 .tipsmain {
     height: 95vh;
+
     text-align: center;
     width: 100%;
+
 }
 
 .tipsmain h2 {
@@ -11,6 +13,7 @@
 }
 
 .advice {
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,6 +22,7 @@
     padding: 20px;
     margin: 20px auto;
     border-radius: 5px;
+
     overflow: scroll;
 }
 

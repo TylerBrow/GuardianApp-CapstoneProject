@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../store';
-import { getNotifications } from '../actions/actions'
+import { getNotifications, getGeofence } from '../actions/actions'
 
 import { Button, Input, Header } from 'react-native-elements'
 
@@ -39,7 +39,7 @@ class LoginScreen extends React.Component{
           type: 'SEND_USER',
           payload: this.state.username
         })
-        this.props.navigation.navigate('Main')
+        this.props.navigation.navigate('Home')
       }
       else{
         this.setState({
