@@ -40,7 +40,7 @@ const styles = theme => ({
 function TextButtons(props) {
   const { classes } = props;
   return (
-    <div className="navbar">
+    <div id="navbar">
       <Button href="/" className={classes.button}>
         Home
       </Button>
@@ -55,57 +55,21 @@ function TextButtons(props) {
       <Button href="/profile" className={classes.button}>
         Profile
       </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="text-button-file"
-        multiple
-        type="file"
-      />
-
       <Button href="/addnotifications" className={classes.button}>
         Notifications
       </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="text-button-file"
-        multiple
-        type="file"
-      />
 
       <Button href="/checkpoints" className={classes.button}>
         Check Points
       </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="text-button-file"
-        multiple
-        type="file"
-      />
 
       <Button href="/tips" className={classes.button}>
         Tips
       </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="text-button-file"
-        multiple
-        type="file"
-      />
 
       <Button href="/login" className={classes.logout}>
-        Logout
+        <span id="span">Logout</span>
       </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="text-button-file"
-        multiple
-        type="file"
-      />
     </div>
   );
 }

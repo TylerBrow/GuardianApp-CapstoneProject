@@ -4,7 +4,20 @@
     left: 25%;
 }
 
-.navbar {
-    margin-left: 250px;
+#navbar {
+    margin-left: 325px;
     width: 80%;
+    color: white;
+}
+
+#navbar a {
+    color: white;
+}
+
+#navbar a:hover {
+    color: rgb(115, 57, 244, 1);
+}
+
+#span:hover {
+    color: white;
 }

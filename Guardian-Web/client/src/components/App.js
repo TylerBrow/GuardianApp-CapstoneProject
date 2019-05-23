@@ -11,6 +11,7 @@ import Tips from './tips/Tips'
 import Checkpoints  from './checkpoints/Checkpoints'
 import Profile from './profile/Profile'
 import {SnackbarProvider} from 'notistack'
+import SimpleMap from './GoogleMap'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -19,24 +20,30 @@ import { faStethoscope, faKey, faHandHoldingHeart } from '@fortawesome/free-soli
 library.add(faStethoscope, faHandHoldingHeart, faKey);
 
 const App = props => {
+  
   return (
     <AuthProvider>
-      <SnackbarProvider maxSnack={3} >
+      
       <Provider store={store}>
         <Router>
           <div>
             {/* public routes */}
-            <Route exact path="/" component={Main} />
+            
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/addnotifications" component={AddNotifications} />
-            <Route path="/tips" component={Tips} />
-            <Route path="/checkpoints" component={Checkpoints} />
-            <Route path="/profile" component={Profile} />
+
+            <SnackbarProvider maxSnack={3} >
+              <Main />
+              <Route exact path='/' component={SimpleMap} />
+              <Route path="/addnotifications" component={AddNotifications} />
+              <Route path="/tips" component={Tips} />
+              <Route path="/checkpoints" component={Checkpoints} />
+              <Route path="/profile" component={Profile} />
+            </SnackbarProvider>
           </div>
         </Router>
       </Provider>
-      </SnackbarProvider>
+  
     </AuthProvider>
   )
 }

@@ -2,33 +2,17 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import {connect} from 'react-redux'
 import {getCoord} from '../actions/actions'
+import Logo from './logo/Logo' 
+import Notifications from './notifications/Notifications'
 
 const SampleMarker = ({text}) => <div>{text}</div>
 
 
 class SimpleMap extends Component {
   
-  // getCoords = () => {
-    
-  //   console.log(this.props.coord)
-  //   let center = this.props.coord[this.props.coord.length - 1]
-  //   //const lat = center.lat
-  //   console.log(center)
-  //     //console.log(lat)
-  // }
-
-    componentDidMount() {
-        
-    }
-
-    // componentDidUpdate(){
-    //   this.getCoords()
-    // }
-
     componentWillMount(){
         getCoord()  
-        // console.log(this.props.coord)
-        // this.getCoords()
+        
     }
 
     static defaultProps = {
@@ -41,8 +25,17 @@ class SimpleMap extends Component {
      
       render() {
         return (
-          // Important! Always set the container height explicitly
-          <div style={{ height: '100%', width: '100%'}}>
+        <div>
+          <Logo />
+                <div className="homepage">   
+                    <div className="notificationreminders">
+                        <h1>Notification Reminders</h1>
+                        <Notifications />
+                        </div>
+           <div className='main'>   
+          <h1>Guardian Tracker</h1>
+          <div className='googlemap'>
+          <div  style={{ height: '100%', width: '100%'}}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
             //   defaultCenter={this.props.coord[this.props.coord.length - 1]}
@@ -58,6 +51,10 @@ class SimpleMap extends Component {
                 text="G"
               />
             </GoogleMapReact>
+          </div>
+          </div>
+          </div>
+          </div>
           </div>
         );
       }
