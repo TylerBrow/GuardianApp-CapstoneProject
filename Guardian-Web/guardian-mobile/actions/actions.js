@@ -58,3 +58,20 @@ export function geoFencing(userId){
   axios.post('http://192.168.0.25:3001/api/geofence/' + userId)
   
 }
+
+export function getGeofence(userId){
+  axios.get('http://192.168.0.25:3001/api/gettinggeofence/' + userId).then(resp => {
+    const geofence = resp.data[resp.data.length - 1]
+    const address = geofence.address
+    const radius = geofence.radius
+    store.dispatch({
+      type: 'GET_GEOFENCE_INFO',
+      address: address,
+      radius: radius
+    })
+  })
+}
+
+export function sendCheckpoint(timestamp, userId){
+  axios.post('http://192.168.0.25:3001/api/checkin/' + userId, {timestamp})
+}

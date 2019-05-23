@@ -13,6 +13,9 @@ import {getNotifications} from '../../actions/actions';
 import { getUserID } from '../../lib/auth';
 import { decode } from "jsonwebtoken"
 import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GroupIcon from '@material-ui/icons/Group'
+import EventNoteIcon from '@material-ui/icons/EventNote'
 
 const styles = theme => ({
   margin: {
@@ -74,41 +77,6 @@ const styles = theme => ({
       backgroundColor: "#fff"
   }
   }
-  // blue: {
-  //   boxShadow: '5px 10px lightblue',
-  //   textTransform: 'uppercase',
-  //   fontSize: 27,
-  //   margin: '20px 0',
-  //   width: '80%',
-  //   padding: '6px 12px',
-  //   backgroundColor: 'rgb(115,57,244)',
-  //   color: blue[100],
-  //   border: '1px solid lightblue',
-  //   fontFamily: [
-  //     '-apple-system',
-  //     'BlinkMacSystemFont',
-  //     '"Segoe UI"',
-  //     'Roboto',
-  //     '"Helvetica Neue"',
-  //     'Arial',
-  //     'sans-serif',
-  //     '"Apple Color Emoji"',
-  //     '"Segoe UI Emoji"',
-  //     '"Segoe UI Symbol"',
-  //   ].join(','),
-  //   '&:hover': {
-  //     backgroundColor: '#0069d9',
-  //     borderColor: '#0062cc',
-  //   },
-  //   '&:active': {
-  //     boxShadow: 'none',
-  //     backgroundColor: '#0062cc',
-  //     borderColor: '#005cbf',
-  //   },
-  //   '&:focus': {
-  //     boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-  //   },
-  // },
 })
 
 
@@ -151,8 +119,24 @@ class NotificationsComponent extends Component {
           className={classNames(classes.margin, classes[item.category])}
           key = {'key' + i}
         >
-         {item.message}<br></br>
-         {moment(Number(item.time)).format('LLL')}
+          { item.category === 'Health' ?
+          <FontAwesomeIcon
+            icon="stethoscope"
+            size="2x"
+          />: item.category === 'Social'?
+          <GroupIcon style={{ fontSize: 50 }}/>
+          : item.category === 'Tasks'?
+          <EventNoteIcon style={{ fontSize: 50 }}/>
+          : item.category === 'Custom'?
+          <FontAwesomeIcon
+            icon="hand-holding-heart"
+            size="2x"
+          />:''
+          }
+          <div className="date-time">
+         <span>{item.message}</span>
+         <span>{moment(Number(item.time)).format('LLL')}</span>
+         </div>
         </Button>
           ))
         }
