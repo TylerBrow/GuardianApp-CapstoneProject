@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import './Navbar.css';
 import { withStyles } from '@material-ui/core/styles';
-
+import {AuthContext} from '../../lib/auth'
 
 const styles = theme => ({
   button: {
@@ -39,6 +39,13 @@ const styles = theme => ({
 
 function TextButtons(props) {
   const { classes } = props;
+
+  const {signout} = useContext(AuthContext)
+
+  function logout() {
+    signout()
+  }
+
   return (
     <div id="navbar">
       <Button href="/" className={classes.button}>
@@ -66,10 +73,11 @@ function TextButtons(props) {
       <Button href="/tips" className={classes.button}>
         Tips
       </Button>
-
-      <Button href="/login" className={classes.logout}>
-        <span id="span">Logout</span>
+      <span id="span">
+      <Button href="/login" className={classes.logout} onClick={logout}>
+        Logout
       </Button>
+      </span>
     </div>
   );
 }

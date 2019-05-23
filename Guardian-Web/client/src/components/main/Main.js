@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react'
+import React, {useEffect, useContext, useState, useReducer} from 'react'
 import "./Main.css"
 import Notifications from '../notifications/Notifications'
 import { BrowserRouter as Router, Route } from "react-router-dom"
@@ -22,18 +22,17 @@ import moment from 'moment'
 
 const Main = (props) => {
 
-    useEffect(() => {
-        getAlert()
-    })
-
-    
 
     const { user } = useContext(AuthContext)    
     
+    useEffect(() => {
+        getAlert()
+    },[user])
    
    let fence = []   
    function getAlert() {
     let oldCheckin = []
+    if(user != null){
     axios.get('/api/checkin/' + user).then(resp => {oldCheckin = resp.data})
         setInterval(
             function getCheckin() {
@@ -58,6 +57,7 @@ const Main = (props) => {
                         }
                 })
             }, 11000)
+        }
     }
 
     return (
