@@ -130,6 +130,27 @@ router.get('/maps', (req, res, next) => {
   })
 })
 
+
+router.get('/checkin/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = `SELECT timestamp FROM checkins WHERE user_id = ?`
+ 
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+ })
+
+router.get('/geofence/:user', (req, res, next) => {
+  const userId = req.params.user
+  const sql = 'SELECT geofence FROM geofences WHERE user_id = ?'
+
+  pool.query(sql, [userId], (err, results, fields) => {
+    res.json(results)
+  })
+})
+
+
+
 module.exports = router;
 
 

@@ -10,10 +10,13 @@ import AddNotifications from './addNotifications/AddNotifications';
 import Tips from './tips/Tips'
 import Checkpoints  from './checkpoints/Checkpoints'
 import Profile from './profile/Profile'
+import {SnackbarProvider} from 'notistack'
+
 
 const App = props => {
   return (
     <AuthProvider>
+      <SnackbarProvider maxSnack={3} >
       <Provider store={store}>
         <Router>
           <div>
@@ -28,6 +31,7 @@ const App = props => {
           </div>
         </Router>
       </Provider>
+      </SnackbarProvider>
     </AuthProvider>
   )
 }

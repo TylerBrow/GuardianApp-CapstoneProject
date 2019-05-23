@@ -2,19 +2,17 @@ import React, {Component} from 'react'
 import GoogleMapReact, {Marker} from 'google-map-react';
 import {connect} from 'react-redux'
 import {getCoord} from '../actions/actions'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import { faThumbtack  } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faThumbtack);
 
-const SampleMarker = ({text}) => <div className='marker'><FontAwesomeIcon icon='thumbtack' size='lg' /></div>
+
+
+
 const handleApiLoaded = (map, maps) => {
-    console.log(map,maps)
-}
-class CheckPoint extends Component {
 
-    
+}
+
+class Emergency extends Component {
+
     componentWillMount() {
         getCoord()
     }
@@ -39,7 +37,6 @@ class CheckPoint extends Component {
               defaultZoom={this.props.zoom}
               zoom={15}
               yesIWantToUseGoogleMapApiInternals
-            //   onGoogleApiLoaded={({map, maps}) => handleApiLoaded(map, maps)}
             >
             {
                 this.props.all.map(item => (
@@ -67,9 +64,7 @@ class CheckPoint extends Component {
             lng: Number(appState.lng)
         }
     }
-    export default connect(mapStatetoProps)(CheckPoint)
+    export default connect(mapStatetoProps)(Emergency)
 
-
-    // AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc
 
     

@@ -10,13 +10,7 @@ class Checkpoints extends React.Component {
     render() {
         return (
             <div>
-<<<<<<< HEAD:Guardian-Web/client/src/components/emergency/Emergency.js
-                {/* <div className="navdiv">
-                    <Navbar props={this.props}/>
-                </div> */}
-=======
               <Logo />
->>>>>>> 9a6f723ec060053b2a62590b3e9bee7cf9825110:Guardian-Web/client/src/components/checkpoints/Checkpoints.js
 
                 <div className="homepage">   
                     <div className="notificationreminders">

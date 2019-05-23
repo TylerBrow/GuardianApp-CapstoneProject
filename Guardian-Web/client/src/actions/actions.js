@@ -32,3 +32,19 @@ export function getCoord() {
         })
     })
 }
+
+// export function getCheckin(user_id) {
+//     axios.get('/api/checkin/' + user_id).then(resp => {
+//         let checkin = []
+//         let newCheckin = resp.data
+//         if (checkin.length !== newCheckin) {
+//             checkin = newCheckin
+//         }
+//     })
+// }
+
+// export function getGeoFence(user_id) {
+//     axios.get('/api/geofence/' + user_id).then(resp => {
+//         console.log(resp.data)
+//     })
+// }
