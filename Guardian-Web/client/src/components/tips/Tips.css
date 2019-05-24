@@ -1,7 +1,6 @@
 .tipsmain {
-    height: 95vh;
-
     text-align: center;
+    height: 80vh;
     width: 100%;
 
 }
@@ -10,6 +9,7 @@
     color: rgb(154, 121, 250);
     font-weight: bolder;
     font-size: 20px;
+    text-align: left;
 }
 
 .advice {
@@ -22,7 +22,7 @@
     padding: 20px;
     margin: 20px auto;
     border-radius: 5px;
-
+    height: 80vh;
     overflow: scroll;
 }
 
@@ -31,14 +31,14 @@ p {
     font-size: 16px;
 }
 
-.safety span {
+/* .safety span {
     background-color: rgb(85, 48, 196);
     color: white;
     border-radius: 3px;
-}
+} */
 
-.while span {
+/* .while span {
     background-color: rgb(85, 48, 196);
     color: white;
     border-radius: 3px;
-}
+} */
