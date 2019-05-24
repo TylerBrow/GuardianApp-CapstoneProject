@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../lib/auth"
 import './Login.css'
+import Swal from 'sweetalert2'
 
 const Login = props => {
   const [username, setUsername] = useState("")
@@ -61,7 +62,7 @@ const Login = props => {
             autoComplete="current-password"
           />
         </FormControl>
-          <Button
+          <Button onClick={()=>{ Swal.fire("Remember to sign in on our Guardian App too!"); }}
             className="loginButton"
             type="submit"
             width='50%'
