@@ -21,13 +21,14 @@ const Profile = (props) => {
     const [radius, setRadius] = useState('off')
 
     const {user} = useContext(AuthContext)
+    console.log(user)
 
     function handleSubmit(e) {
         e.preventDefault();
         const address = street + ',' + city + ',' + st + ' ' + zip
-        setProfile({user, name, address, radius}).then(resp => {
+        setProfile(user, name, address, radius).then(
             props.history.push('/')
-        })
+        )
     }
         return (
             <div>

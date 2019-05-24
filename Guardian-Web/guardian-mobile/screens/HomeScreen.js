@@ -69,21 +69,18 @@ import {
     }
     
     geo = async () => {
-      if(this.props.radius === 'off'){
-        Location.stopGeofencingAsync('geofence')
-      }else {
-      await Location.geocodeAsync(this.props.address).then(position => {
-        position.map(item => {
-          this.setState({
-            latitude: item.latitude,
-            longitude: item.longitude
+      console.log(this.props.address)
+        Location.geocodeAsync(this.props.address).then(position => {
+          position.map(item => {
+            this.setState({
+              latitude: item.latitude,
+              longitude: item.longitude
+            })
           })
         })
         console.log('lat', this.state.latitude, 'lng', this.state.longitude)
         console.log(this.props.radius)
-        Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
-      })
-      }
+       await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
     }
 
     load = async () => {

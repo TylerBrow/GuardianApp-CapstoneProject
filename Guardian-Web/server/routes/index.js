@@ -44,14 +44,12 @@ router.post("/profile", (req, res, next) => {
   const address = req.body.address
   const radius = req.body.radius
 
-  const sql = "INSERT INTO profile (user_id, name, address, radius) VALUES (?, ?, ?, ?)"
+  const sql = "INSERT INTO profiles (user_id, name, address, radius) VALUES (?, ?, ?, ?)"
 
   pool.query(sql, [user, name, address, radius], (err, results, fields) => {
-    const profile_id = results.insertId
+    // const profile_id = results.insertId
 
-    res.json({
-      profile_id: profile_id
-    })
+    res.json(results)
   })
 })
 
@@ -139,10 +137,12 @@ router.post('/maps', (req, res, next) => {
   })
 })
 
-router.get('/maps', (req, res, next) => {
-  const sql = 'SELECT m.lat, m.lng, m.time FROM maps m'
+router.get('/maps/:user', (req, res, next) => {
+  const userId = req.params.user
+  console.log('back user',userId)
+  const sql = 'SELECT m.lat, m.lng, m.time FROM maps m WHERE user_id = ?'
 
-  pool.query(sql, (err, results, fields) => {
+  pool.query(sql, [userId], (err, results, fields) => {
     res.json(results)
   })
 })
