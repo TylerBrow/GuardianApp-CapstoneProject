@@ -46,7 +46,7 @@ const Profile = (props) => {
                         <form id="profileform" onSubmit={handleSubmit}>
                             <label>Loved One's Name</label>
                             <input type="text" name="name" placeholder="Name" onChange={e => setName(e.target.value)} />    
-                                <fieldset>
+                                <fieldset className="fieldset">
                                     <label>Loved One's Address</label><br></br>
                                     <input type="text" name="street" placeholder="Street Address" maxLength="30" onChange={e => setStreet(e.target.value)} />
                                     {/* <input type="text" name="apt" placeholder="APT" onChange={e => setApt(e.target.value)} /> */}

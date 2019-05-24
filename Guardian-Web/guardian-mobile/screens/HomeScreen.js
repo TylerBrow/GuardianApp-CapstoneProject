@@ -69,6 +69,9 @@ import {
     }
     
     geo = async () => {
+      if(this.props.radius === 'off'){
+        Location.stopGeofencingAsync('geofence')
+      }else {
       await Location.geocodeAsync(this.props.address).then(position => {
         position.map(item => {
           this.setState({
@@ -78,7 +81,9 @@ import {
         })
         console.log('lat', this.state.latitude, 'lng', this.state.longitude)
         console.log(this.props.radius)
+        Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
       })
+      }
     }
 
     load = async () => {
@@ -111,8 +116,6 @@ import {
         });
       }
       await Location.startLocationUpdatesAsync('currentLoc', {accuracy : Location.Accuracy.Highest, timeInterval: 10000, distanceInterval: 0, showsBackgroundLocationIndicator: true})
-
-      await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
 
       const { status: existingStatus } = await Permissions.getAsync(
           Permissions.NOTIFICATIONS
@@ -272,7 +275,6 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
         getNotifications(user)
         getUserLocation(locations, user)
         getGeofence(user)
-        console.log(user)
       } catch (e) {
         console.error('Failed to load name.')
       }

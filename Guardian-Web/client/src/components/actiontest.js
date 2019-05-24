@@ -28,13 +28,16 @@ const Test = (props) => {
   return (
     <div>
       <form className="notificationsform" onSubmit={handleSubmit}>
+        <label className="select">
+          *
           <select onChange={e => setCategory(e.target.value)}>
-            <option>Choose Reminder Category</option>
+            <option >Choose Reminder Category</option>
             <option value='Health'>Health</option>
             <option value='Social'>Social</option>
             <option value='Tasks'>Tasks</option>
             <option value='Custom'>Custom</option>
           </select>
+        </label>
           <label className="inputfield">
             Reminder
           <input type='text' placeholder='Add reminder' maxLength= '30' onChange={e => setMessage(e.target.value)} />
