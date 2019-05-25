@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { useSelector } from 'react-redux'
-import {getCoord} from '../actions/actions'
+import {getCoord, getEmergency} from '../actions/actions'
 import Logo from './logo/Logo' 
 import Notifications from './notifications/Notifications'
 import {AuthContext} from '../lib/auth'
@@ -9,10 +9,9 @@ import {AuthContext} from '../lib/auth'
 const SampleMarker = ({text}) => <div>{text}</div>
 
 const SimpleMap = (props) => {
-  // let [userId] = useState('')
 
   const { user } = useContext(AuthContext)
-  // userId = user
+  
   const { newCenter, lat, lng } = useSelector(appState => {
     return {
       newCenter: appState.center,
@@ -20,12 +19,13 @@ const SimpleMap = (props) => {
       lng: Number(appState.lng)
     }
   })
-  console.log('front user', user)
-  console.log(newCenter)
 
   useEffect(() => {
     getCoord(user)
-  }, [])
+    if (lat !== 0) {
+    getEmergency(lat, lng)
+    }
+  }, [lat])
 
   return (
     <div>

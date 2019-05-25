@@ -4,7 +4,7 @@ var pool=require('../db');
 const sha512 = require("js-sha512");
 const jwt = require('jsonwebtoken');
 const config = require("config")
-
+const axios = require('axios')
 
 router.post("/register", (req, res, next) => {
   console.log(req.body)
@@ -139,14 +139,22 @@ router.post('/maps', (req, res, next) => {
 
 router.get('/maps/:user', (req, res, next) => {
   const userId = req.params.user
-  console.log('back user',userId)
+  
   const sql = 'SELECT m.lat, m.lng, m.time FROM maps m WHERE user_id = ?'
 
   pool.query(sql, [userId], (err, results, fields) => {
     res.json(results)
   })
 })
+var lat2 = []
+var lng2 = []
 
+router.post('/emergency/', (req, res, next) => {
+ 
+  lat2.push(req.body.lat)
+  lng2.push(req.body.lng)
+  res.json(results)
+})
 
 router.post('/checkin/:user', (req, res, next) => {
   const userId = req.params.user
@@ -203,6 +211,22 @@ router.post('/geofence/:user', (req, res, next) => {
 })
 
 
+function getEmergency() {
+  const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
+  `location=${lat},${lng}` +
+  "&radius=2000" +
+  `&keyword=Police&OR&Fire ` +
+  "&key=AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc" 
+  // `&pagetoken=20`
+   console.log(googleUrl)
+  // axios.get(url).then(resp => {console.log(resp.data)})
+  }
+  getEmergency()
+
+
+
+
+
+
+
 module.exports = router;
-
-

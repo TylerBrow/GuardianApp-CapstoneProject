@@ -23,7 +23,7 @@ export function getNotifications(user_id) {
 
 export function getCoord(user) {
     axios.get('/api/maps/' + user).then(resp => {
-        console.log(resp.data)
+        
         const coord = resp.data
         if(coord.length !== 0 ){
         store.dispatch({
@@ -46,6 +46,10 @@ export function getCoord(user) {
     })
 }
 
+export function getEmergency(lat, lng) {
+    
+    axios.post('/api/emergency/' , {lat,lng})
+}
 
 export function setProfile(user, name, address, radius) {
     return axios.post('/api/profile', {user, name, address, radius})
