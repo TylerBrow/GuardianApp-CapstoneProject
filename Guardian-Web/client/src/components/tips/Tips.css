@@ -13,7 +13,6 @@
 }
 
 .advice {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,4 +40,9 @@ p {
     background-color: rgb(85, 48, 196);
     color: white;
     border-radius: 3px;
+}
+
+.advicepic {
+    width: 100%;
+    height: 45vh;
 }

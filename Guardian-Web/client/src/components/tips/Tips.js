@@ -20,7 +20,7 @@ class Tips extends React.Component {
                     <div className="tipsmain">
                     <h1>Tips &amp; Advice for Alzheimer's</h1>
                         <div className="advice">
-                        
+                        <img className="advicepic" src="http://collegeharbor.com/wp-content/uploads/2018/05/mother-daughter-cell-phone.jpg" />
                         <p className="safety">
                         If you are caring for someone with Alzheimer's disease or a related dementia, your role in managing daily tasks will increase as the disease progresses. 
                         Consider practical tips that can help the person with dementia participate as much as possible and enable you to manage tasks effectively.<br></br>

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../../lib/auth"
 import './Login.css'
 import Swal from 'sweetalert2'
+import Footer from '../footer/Footer'
 
 const Login = props => {
   const [username, setUsername] = useState("")
@@ -87,6 +88,7 @@ const Login = props => {
          </div>
         </form>
       </Paper>
+      <Footer />
     </div>
   )
 }

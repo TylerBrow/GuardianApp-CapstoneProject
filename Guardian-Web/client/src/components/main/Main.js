@@ -25,9 +25,9 @@ const Main = (props) => {
 
     const { user } = useContext(AuthContext)    
     
-    useEffect(() => {
-        getAlert()
-    },[user])
+    // useEffect(() => {
+    //     getAlert()
+    // },[user])
    
    let fence = []   
    function getAlert() {
