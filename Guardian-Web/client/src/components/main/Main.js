@@ -31,7 +31,7 @@ const Main = (props) => {
                     if(resp.data.length !== 0){
                      const lastTime = resp.data[resp.data.length - 1]
                      const time = lastTime.timestamp
-                     console.log(time)
+                     
                      let newCheckin = resp.data
                          if (oldCheckin.length !== newCheckin.length) {
                           oldCheckin = newCheckin

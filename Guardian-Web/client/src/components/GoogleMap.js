@@ -1,31 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { useSelector } from 'react-redux'
-import {getCoord} from '../actions/actions'
+import {getCoord, getEmergency, grabData} from '../actions/actions'
 import Logo from './logo/Logo' 
 import Notifications from './notifications/Notifications'
 import {AuthContext} from '../lib/auth'
 
-const SampleMarker = ({text}) => <div>{text}</div>
 
+const SampleMarker = ({text}) => <div>{text}</div>
+const EmergencyMarker = ({text1}) => <div><p>{text1}</p></div>
 const SimpleMap = (props) => {
-  // let [userId] = useState('')
 
   const { user } = useContext(AuthContext)
-  // userId = user
-  const { newCenter, lat, lng } = useSelector(appState => {
+  
+  const { newCenter, lat, lng, emergency } = useSelector(appState => {
     return {
       newCenter: appState.center,
       lat: Number(appState.lat),
-      lng: Number(appState.lng)
+      lng: Number(appState.lng),
+      emergency: appState.emergency
     }
   })
-  console.log('front user', user)
-  console.log(newCenter)
 
   useEffect(() => {
     getCoord(user)
-  }, [])
+    if (lat !== 0) {
+    getEmergency(lat, lng)
+    }
+    grabData()
+  }, [lat])
 
   return (
     <div>
@@ -51,8 +54,22 @@ const SimpleMap = (props) => {
                   lat={lat}
                   lng={lng}
                   center={props.center}
-                  text="G"
+                  text="G"  
                 />
+
+                {
+                  emergency.map(item => {
+                    console.log(item.location.lat, item.location.lng)
+                    
+                    return <EmergencyMarker
+                      lat = {item.location.lat}
+                      lng = {item.location.lng}
+                      text1 = {item.name}
+                />
+
+                   } )
+                
+                }    
               </GoogleMapReact>
             </div>
           </div>

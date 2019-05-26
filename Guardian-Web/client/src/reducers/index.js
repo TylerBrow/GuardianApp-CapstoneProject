@@ -3,7 +3,8 @@ const initialState = {
   lat: '',
   lng: '',
   notifications: [],
-  all: []
+  all: [],
+  emergency: []
 }
 
 export default function (state = initialState, action) {
@@ -14,6 +15,8 @@ export default function (state = initialState, action) {
      return {...state, notifications: action.notifications}
      case 'GET_PROFILE':
      return {...state, profile: action.profile}
+     case 'GET_EMERGENCY':
+     return {...state, emergency: action.payload }
     default:
       return state
   }
