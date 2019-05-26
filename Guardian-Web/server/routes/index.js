@@ -146,14 +146,14 @@ router.get('/maps/:user', (req, res, next) => {
     res.json(results)
   })
 })
-var lat2 = []
-var lng2 = []
+const lat2 = []
+const lng2 = []
 
-router.post('/emergency/', (req, res, next) => {
- 
+router.post('/emergency', (req, res, next) => {
+   
   lat2.push(req.body.lat)
   lng2.push(req.body.lng)
-  res.json(results)
+  getEmergency(lat2, lng2)
 })
 
 router.post('/checkin/:user', (req, res, next) => {
@@ -211,17 +211,26 @@ router.post('/geofence/:user', (req, res, next) => {
 })
 
 
-function getEmergency() {
+function getEmergency(lat2, lng2) {
   const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-  `location=${lat},${lng}` +
+  `location=${lat2[0]},${lng2[0]}` +
   "&radius=2000" +
-  `&keyword=Police&OR&Fire ` +
+  `&keyword=Police&stationANDFire` +
   "&key=AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc" 
-  // `&pagetoken=20`
-   console.log(googleUrl)
-  // axios.get(url).then(resp => {console.log(resp.data)})
-  }
-  getEmergency()
+
+  console.log(googleUrl)
+
+  axios.get(googleUrl).then(resp => {
+    sendEmergency(resp.data)
+  })
+ }
+
+
+function sendEmergency(data) {
+  router.get('/sentdata', (req, res, next) => {
+    res.json(data)
+  })
+}
 
 
 
