@@ -5,10 +5,17 @@ import {getCoord, getEmergency, grabData} from '../actions/actions'
 import Logo from './logo/Logo' 
 import Notifications from './notifications/Notifications'
 import {AuthContext} from '../lib/auth'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom'
 
 
-const SampleMarker = ({text}) => <div>{text}</div>
-const EmergencyMarker = ({text1}) => <div><p>{text1}</p></div>
+const SampleMarker = ({text}) => <div className="main-marker"><div className="icon-marker"><FontAwesomeIcon icon='map-marker' color="rgb(115, 57, 244, 1)" size='3x' /></div><p className="g-logo">{text}</p></div>
+
+const EmergencyMarker = ({text1}) => 
+<div className="emergency">
+  <FontAwesomeIcon icon='exclamation-circle' color="red" size='2x' />
+    <p>{text1}</p>
+</div>
 const SimpleMap = (props) => {
 
   const { user } = useContext(AuthContext)
@@ -30,6 +37,14 @@ const SimpleMap = (props) => {
     grabData()
   }, [lat])
 
+  // function reloadData (e){
+  //   if (lat !== 0) {
+  //     getEmergency(lat, lng)
+  //     }
+  //     grabData()
+  //   e.preventDefault()
+  // }
+
   return (
     <div>
       <Logo />
@@ -40,6 +55,7 @@ const SimpleMap = (props) => {
         </div>
         <div className='main'>   
           <h1>Guardian Tracker</h1>
+          {/* <button onClick={reloadData}>button</button> */}
           <div className='googlemap'>
             <div  style={{ height: '100%', width: '100%'}}>
               <GoogleMapReact
@@ -47,19 +63,19 @@ const SimpleMap = (props) => {
                 // defaultCenter={props.center}
                 center={newCenter} 
                 // defaultZoom={props.zoom}
-                zoom={15}
+                zoom={17}
                 yesIWantToUseGoogleMapApiInternals
               >
                 <SampleMarker
                   lat={lat}
                   lng={lng}
                   center={props.center}
-                  text="G"  
+                  text="G"
                 />
 
                 {
                   emergency.map(item => {
-                    console.log(item.location.lat, item.location.lng)
+                    // console.log(item.location.lat, item.location.lng)
                     
                     return <EmergencyMarker
                       lat = {item.location.lat}
