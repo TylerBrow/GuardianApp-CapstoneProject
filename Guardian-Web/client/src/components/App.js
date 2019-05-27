@@ -15,9 +15,9 @@ import SimpleMap from './GoogleMap'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStethoscope, faKey, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
+import { faStethoscope, faKey, faHandHoldingHeart, faExclamationCircle, faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faStethoscope, faHandHoldingHeart, faKey);
+library.add(faStethoscope, faHandHoldingHeart, faExclamationCircle, faMapMarker, faKey);
 
 const App = props => {
   

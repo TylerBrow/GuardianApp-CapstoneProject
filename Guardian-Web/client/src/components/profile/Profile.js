@@ -57,7 +57,7 @@ const Profile = (props) => {
                                 </fieldset>
                                 <label className="select">Select a Radius Boundary</label>
                                 <select className="selectoption" onChange={e => setRadius(e.target.value)}>
-                                    <option value='off'>OFF</option>
+                                    <option value='1000000'>OFF</option>
                                     <option value='25'>25m</option>
                                     <option value='50'>50m</option>
                                     <option value='100'>100m</option>

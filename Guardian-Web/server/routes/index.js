@@ -146,14 +146,11 @@ router.get('/maps/:user', (req, res, next) => {
     res.json(results)
   })
 })
-const lat2 = []
-const lng2 = []
+// const lat2 = []
+// const lng2 = []
 
 router.post('/emergency', (req, res, next) => {
-   
-  lat2.push(req.body.lat)
-  lng2.push(req.body.lng)
-  getEmergency(lat2, lng2)
+  getEmergency(req.body.lat, req.body.lng)
 })
 
 router.post('/checkin/:user', (req, res, next) => {
@@ -210,32 +207,31 @@ router.post('/geofence/:user', (req, res, next) => {
   })
 })
 
-
-function getEmergency(lat2, lng2) {
-  const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-  `location=${lat2[0]},${lng2[0]}` +
-  "&radius=2000" +
-  `&keyword=Police&stationANDFire` +
-  "&key=AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc" 
-
-  console.log(googleUrl)
-
-  axios.get(googleUrl).then(resp => {
-    sendEmergency(resp.data)
-  })
- }
-
-
 function sendEmergency(data) {
   router.get('/sentdata', (req, res, next) => {
     res.json(data)
   })
 }
 
+function getEmergency(lat, lng) {
+  const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
+  `location=${lat},${lng}` +
+  "&radius=3000" +
+  `&keyword=(police+station+AND+fire)+OR+(firestation)` +
+  "&key=AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc" 
 
+  console.log(googleUrl)
+  console.log(lat, lng)
 
+  axios.get(googleUrl).then(resp => {
+    sendEmergency(resp.data)
+  })
+ }
 
-
-
+//  function sendEmergency(data) {
+//   router.get('/sentdata', (req, res, next) => {
+//     res.json(data)
+//   })
+// }
 
 module.exports = router;

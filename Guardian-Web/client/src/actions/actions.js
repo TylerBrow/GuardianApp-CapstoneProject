@@ -68,11 +68,9 @@ export function getProfile() {
 
 export function grabData() {
     axios.get('/api/sentdata').then(resp =>{
+        console.log(resp.data)
         const info = resp.data
-        const location = info.results.map(item => item.geometry).map(item => item.location)
-        const name = info.results.map(item => item.name)
         const emergencyInfo = info.results.map(item  => {
-            console.log(item) 
             return {
             location: item.geometry.location,
             name: item.name
@@ -84,8 +82,3 @@ export function grabData() {
        })
     })
 }
-
-// const emergencyInfo = info.results.map(item => results{
-//     location: item.geometry,
-//     name: item.name
-// })
