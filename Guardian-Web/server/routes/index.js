@@ -94,15 +94,6 @@ router.post('/notifications', (req, res, next) => {
 })
 
 router.get('/notifications/:user_id', (req, res, next) => {
-  // const sql = 'SELECT n., u.id* FROM notifications n, LEFT JOIN users u, ON u.id = n.user_id, WHERE n.user_id = 1;' 
-
- // router.get('/notifications', (req, res, next) => {
-  
-  // const userId = 
-  // const sql = 'SELECT n.*, u.id FROM notifications n LEFT JOIN users u ON u.username = n.user_id WHERE n.user_id = ?' 
-  // 'SELECT id, FROM users WHERE username = 'test''
-  
-  // const user_id = req.params.user_id;
   const sql = `SELECT * FROM notifications WHERE user_id = ?`;
 
 
@@ -145,12 +136,6 @@ router.get('/maps/:user', (req, res, next) => {
   pool.query(sql, [userId], (err, results, fields) => {
     res.json(results)
   })
-})
-// const lat2 = []
-// const lng2 = []
-
-router.post('/emergency', (req, res, next) => {
-  getEmergency(req.body.lat, req.body.lng)
 })
 
 router.post('/checkin/:user', (req, res, next) => {
@@ -206,32 +191,21 @@ router.post('/geofence/:user', (req, res, next) => {
     res.json(results)
   })
 })
-
-function sendEmergency(data) {
-  router.get('/sentdata', (req, res, next) => {
-    res.json(data)
-  })
-}
-
-function getEmergency(lat, lng) {
+  
+router.get('/emergency/:lat/:lng', (req, res, next) => {
   const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-  `location=${lat},${lng}` +
+  `location=${req.params.lat},${req.params.lng}` +
   "&radius=3000" +
   `&keyword=(police+station+AND+fire)+OR+(firestation)` +
   "&key=AIzaSyD6VImWKzsNcq76jemUdj5j6qkgofPlcqc" 
 
   console.log(googleUrl)
-  console.log(lat, lng)
+  console.log(req.params.lat, req.params.lng)
 
   axios.get(googleUrl).then(resp => {
-    sendEmergency(resp.data)
+    res.json(resp.data)
   })
- }
+})
 
-//  function sendEmergency(data) {
-//   router.get('/sentdata', (req, res, next) => {
-//     res.json(data)
-//   })
-// }
 
 module.exports = router;
