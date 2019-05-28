@@ -17,11 +17,11 @@ const Main = (props) => {
     
     useEffect(() => {
         getAlert()
-    })
-   
-   let fence = []   
+    }, [])
+     
    function getAlert() {
     let oldCheckin = []
+    let fence = []
     if(user != null){
     axios.get('/api/checkin/' + user).then(resp => {oldCheckin = resp.data})
         setInterval(
@@ -37,7 +37,7 @@ const Main = (props) => {
                          }
                         }
                     })
-                }, 10000)
+                }, 5000)
             }
         setInterval(
             function getGeoFence() {

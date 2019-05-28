@@ -15,7 +15,7 @@ export function getUserLocation(location, userId){
   const longitude = long[0]
 
 
-   axios.post('http://10.68.0.243:3001/api/maps', {lat, time, longitude, userId})
+   axios.post('http://10.68.0.117:3001/api/maps', {lat, time, longitude, userId})
 
 }
 
@@ -23,7 +23,7 @@ export function getNotifications(userId){
 
 
 
-  axios.get('http://10.68.0.243:3001/api/notifications/' + userId).then(resp => {
+  axios.get('http://10.68.0.117:3001/api/notifications/' + userId).then(resp => {
 
     if(resp.data.length !== 0){
     let localNoti = []
@@ -65,7 +65,7 @@ export function getNotifications(userId){
 export function geoFencing(userId){
 
 
-  axios.post('http://10.68.0.243:3001/api/geofence/' + userId)
+  axios.post('http://10.68.0.117:3001/api/geofence/' + userId)
 
   
 }
@@ -73,7 +73,7 @@ export function geoFencing(userId){
 export function getGeofence(userId){
 
 
-  axios.get('http://10.68.0.243:3001/api/gettinggeofence/' + userId).then(resp => {
+  axios.get('http://10.68.0.117:3001/api/gettinggeofence/' + userId).then(resp => {
 
     const geofence = resp.data[resp.data.length - 1]
     const address = geofence.address
@@ -89,6 +89,6 @@ export function getGeofence(userId){
 export function sendCheckpoint(timestamp, userId){
 
 
-  axios.post('http://10.68.0.243:3001/api/checkin/' + userId, {timestamp})
+  axios.post('http://10.68.0.117:3001/api/checkin/' + userId, {timestamp})
 
 }
