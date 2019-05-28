@@ -57,7 +57,6 @@ import {
       this._getLocationAsync()
       this.load()
       this.gettingUser()
-      // this.geo()
     }
 
     componentWillMount(){
@@ -69,18 +68,17 @@ import {
     }
     
     geo = async () => {
-      console.log(this.props.address)
-        Location.geocodeAsync(this.props.address).then(position => {
-          position.map(item => {
-            this.setState({
-              latitude: item.latitude,
-              longitude: item.longitude
-            })
+      Location.geocodeAsync(this.props.address).then(position => {
+        position.map(item => {
+          this.setState({
+            latitude: item.latitude,
+            longitude: item.longitude
           })
         })
-        console.log('lat', this.state.latitude, 'lng', this.state.longitude)
-        console.log(this.props.radius)
-       await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
+      })
+      // console.log('lat', this.state.latitude, 'lng', this.state.longitude)
+      // console.log(this.props.radius)
+      await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
     }
 
     load = async () => {
@@ -179,66 +177,49 @@ import {
             rightContainerStyle={{flex: 2}}
           />
           </LinearGradient>
-          <View style={styles.itemListContainer}>
-            <ListItem
-            style={[styles.listItem]}
-              key="item-1"
-              leftIcon={
-              <Icon 
-                name="stethoscope"
-                type="font-awesome"
-                color="#fc7b9b"
-                size= {55}
-                />
-              }
-              containerStyle={{backgroundColor: 'transparent'}}
-              title="Dentist Appointment"
-              titleStyle={{fontSize: 28, fontWeight: '900', color:"#fc7b9b"}}
-              subtitle="May 11, 2019 10:00 AM"
-              subtitleStyle={{fontSize: 20}}
-            />  
-              {
-                this.props.notifications.map((item, i) => (
-            <ListItem 
-              key = {"key-"+ i}
-              style={styles.listItem}
-              leftIcon={
-                item.category == 'Health'?
-              <Icon 
-                name="stethoscope"
-                type="font-awesome"
-                color="#fc7b9b"
-                size= {55}
+          <View style={styles.itemListContainer}> 
+            {
+              this.props.notifications.map((item, i) => (
+                <ListItem 
+                  key = {"key-"+ i}
+                  style={styles.listItem}
+                  leftIcon={
+                    item.category == 'Health'?
+                  <Icon 
+                    name="stethoscope"
+                    type="font-awesome"
+                    color="#fc7b9b"
+                    size= {55}
+                    /> 
+                  : item.category == 'Social'?
+                  <Icon 
+                    name="group"
+                    type="material-icon"
+                    color="#4f8ff7"
+                    size= {55}
+                    /> 
+                    : item.category == 'Tasks'?
+                    <Icon 
+                    name="event-note"
+                    type="material-icon"
+                    color="#86e884"
+                    size= {55}
+                    /> :
+                    item.category == 'Custom'?
+                    <Icon 
+                    name="favorite-border"
+                    type="material-icon"
+                    color="rgb(255, 174, 68)"
+                    size= {55}
+                    /> : ''
+                  }
+                  title= {item.message}
+                  titleStyle={[{fontSize: 27, fontWeight: '900'}, styles[item.category]]}
+                  subtitle= {moment(Number(item.time)).format('LLL')}
+                  subtitleStyle={{fontSize: 20}}
                 /> 
-              : item.category == 'Social'?
-              <Icon 
-                name="group"
-                type="material-icon"
-                color="#4f8ff7"
-                size= {55}
-                /> 
-                : item.category == 'Tasks'?
-                <Icon 
-                name="event-note"
-                type="material-icon"
-                color="#86e884"
-                size= {55}
-                /> :
-                item.category == 'Custom'?
-                <Icon 
-                name="favorite-border"
-                type="material-icon"
-                color="rgb(255, 174, 68)"
-                size= {55}
-                /> : ''
-              }
-              title= {item.message}
-              titleStyle={[{fontSize: 27, fontWeight: '900'}, styles[item.category]]}
-              subtitle= {moment(Number(item.time)).format('LLL')}
-              subtitleStyle={{fontSize: 20}}
-            /> 
-            ))
-            }
+          ))
+          }
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -287,7 +268,6 @@ TaskManager.defineTask('geofence', ({ data: { eventType, region }, error }) => {
     return;
   }
   if(region){
-    // console.log(region)
   }
   if (eventType === Location.GeofencingEventType.Exit) {
     const load = async () => {
@@ -302,8 +282,6 @@ TaskManager.defineTask('geofence', ({ data: { eventType, region }, error }) => {
     }
 
     load()
-
-    console.log("You've left region:", region);
   }
 })
 

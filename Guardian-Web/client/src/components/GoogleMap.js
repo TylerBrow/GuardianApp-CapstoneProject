@@ -5,27 +5,35 @@ import {getCoord, getEmergency} from '../actions/actions'
 import Logo from './logo/Logo' 
 import Notifications from './notifications/Notifications'
 import {AuthContext} from '../lib/auth'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SampleMarker = ({text}) => <div>{text}</div>
 
+const SampleMarker = ({text}) => <div className="main-marker"><div className="icon-marker"><FontAwesomeIcon icon='map-marker' color="rgb(115, 57, 244, 1)" size='3x' /></div><p className="g-logo">{text}</p></div>
+
+const EmergencyMarker = ({text1}) => 
+<div className="emergency">
+  <FontAwesomeIcon icon='exclamation-circle' color="red" size='2x' />
+    <p>{text1}</p>
+</div>
 const SimpleMap = (props) => {
 
   const { user } = useContext(AuthContext)
   
-  const { newCenter, lat, lng } = useSelector(appState => {
+  const { newCenter, lat, lng, emergency } = useSelector(appState => {
     return {
       newCenter: appState.center,
       lat: Number(appState.lat),
-      lng: Number(appState.lng)
+      lng: Number(appState.lng),
+      emergency: appState.emergency
     }
   })
 
   useEffect(() => {
     getCoord(user)
-    if (lat !== 0) {
+    if(lat !== 0){
     getEmergency(lat, lng)
     }
-  }, [lat])
+  }, [lat, lng, user])
 
   return (
     <div>
@@ -37,14 +45,13 @@ const SimpleMap = (props) => {
         </div>
         <div className='main'>   
           <h1>Guardian Tracker</h1>
+          {/* <button onClick={reloadData}>button</button> */}
           <div className='googlemap'>
             <div  style={{ height: '100%', width: '100%'}}>
               <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
-                // defaultCenter={props.center}
                 center={newCenter} 
-                // defaultZoom={props.zoom}
-                zoom={15}
+                zoom={17}
                 yesIWantToUseGoogleMapApiInternals
               >
                 <SampleMarker
@@ -53,6 +60,19 @@ const SimpleMap = (props) => {
                   center={props.center}
                   text="G"
                 />
+
+                {
+                  emergency.map((item,i) => {
+                    return <EmergencyMarker
+                      key = {'key-' + i}
+                      lat = {item.location.lat}
+                      lng = {item.location.lng}
+                      text1 = {item.name}
+                />
+
+                   } )
+                
+                }    
               </GoogleMapReact>
             </div>
           </div>
@@ -60,14 +80,6 @@ const SimpleMap = (props) => {
       </div>
     </div>
   )
-}
-
-SimpleMap.defaultProps = {
-  center: {
-    lat: 36.158638,
-    lng: -115.152512
-  },
-  zoom: 11
 }
 
 export default SimpleMap
