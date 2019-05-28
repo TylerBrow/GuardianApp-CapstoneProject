@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../lib/auth"
 import './Login.css'
+import Swal from 'sweetalert2'
+import Footer from '../footer/Footer'
+
 
 const Login = props => {
   const [username, setUsername] = useState("")
@@ -15,6 +18,7 @@ const Login = props => {
   const [error, setError] = useState(false)
   const [errorText, setErrorText] = useState("")
   const { signin } = useContext(AuthContext)
+
 
   function sendLogin(e) {
     e.preventDefault()
@@ -31,7 +35,13 @@ const Login = props => {
   }
 
   return (
+    <div>
+      
+    <div className="mottoContainer">
+      <span className="motto">"Guarding those you love..."</span>
+    </div>
     <div className="login">
+      
       <Paper className="pad">
         <div className="loginIcon">
         <span className="name">Guardian</span>
@@ -61,7 +71,7 @@ const Login = props => {
             autoComplete="current-password"
           />
         </FormControl>
-          <Button
+          <Button onClick={()=>{ Swal.fire("Remember to sign in on our Guardian App too!"); }}
             className="loginButton"
             type="submit"
             width='50%'
@@ -86,6 +96,8 @@ const Login = props => {
          </div>
         </form>
       </Paper>
+      <Footer />
+    </div>
     </div>
   )
 }

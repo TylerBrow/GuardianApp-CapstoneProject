@@ -10,7 +10,8 @@
 #tipsmain h2 {
     color: rgb(154, 121, 250);
     font-weight: bolder;
-    font-size: 25px;
+
+    font-size: 27px;
     text-align: left;
 }
 
@@ -20,15 +21,21 @@
     margin-bottom: 0;
 }
 
+
 .advice {
     display: flex;
     flex-direction: column;
     width: 90%;
     background: white;
-    padding: 0px 20px;
+
+    
     margin: auto;
     border-radius: 5px;
-    height: 82vh;
+    height: 35vh;
+
+    padding: 0px 20px;
+    
+
     overflow: scroll;
 }
 
@@ -46,18 +53,17 @@
 
 .advice p {
     text-align: left;
-    font-size: 16px;
+    font-size: 22px;
     margin: 0;
+
 }
 
-/* .safety span {
-    background-color: rgb(85, 48, 196);
-    color: white;
-    border-radius: 3px;
-} */
+.advicepic {
+    width: 93%;
+    border-radius: 5px;
+    height: 45vh;
+}
 
-/* .while span {
-    background-color: rgb(85, 48, 196);
-    color: white;
-    border-radius: 3px;
-} */
+.safety {
+    font-size: 27px;
+}

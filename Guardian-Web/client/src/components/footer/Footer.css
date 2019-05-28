@@ -1,0 +1,17 @@
+#footer {
+    width: 100%;
+    color: white;
+    padding-left: 80%;
+    margin-top: 5%;
+}
+
+#footer p {
+   padding-left: 3%;
+}
+
+#footer a {
+    padding-left: 7%;
+    color: rgb(115, 57, 244);
+}
+
+

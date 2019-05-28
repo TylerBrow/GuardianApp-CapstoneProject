@@ -17,8 +17,11 @@ class Tips extends React.Component {
                         <Notifications />
                     </div>
 
-                    <div id = "tipsmain">
-                        <h1>Tips &amp; Advice for Alzheimer's</h1>
+
+                    <div className ="tipsmain">
+                    <h1>Tips &amp; Advice for Alzheimer's</h1>
+                    <img className="advicepic" src="http://collegeharbor.com/wp-content/uploads/2018/05/mother-daughter-cell-phone.jpg" />
+
                         <div className="advice">
                         
                             <p className="first-p">

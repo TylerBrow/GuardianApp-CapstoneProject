@@ -35,6 +35,11 @@ const Register = props => {
   }
 
   return (
+    <div>
+      <div className="mottoContainer">
+      <span className="motto">"Guarding those you love..."</span>
+      </div>
+    
     <div className="login">
       <Paper className="pad">
         <div className="loginIcon">
@@ -86,6 +91,7 @@ const Register = props => {
           </Button>
         </form>
       </Paper>
+    </div>
     </div>
   )
 }

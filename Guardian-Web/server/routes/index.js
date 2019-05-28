@@ -138,6 +138,7 @@ router.get('/maps/:user', (req, res, next) => {
   })
 })
 
+
 router.post('/checkin/:user', (req, res, next) => {
   const userId = req.params.user
   const timestamp = req.body.timestamp
@@ -191,8 +192,10 @@ router.post('/geofence/:user', (req, res, next) => {
     res.json(results)
   })
 })
+
   
 router.get('/emergency/:lat/:lng', (req, res, next) => {
+
   const googleUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
   `location=${req.params.lat},${req.params.lng}` +
   "&radius=3000" +
