@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {connect} from 'react-redux'
+import { useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
@@ -16,6 +16,7 @@ import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GroupIcon from '@material-ui/icons/Group'
 import EventNoteIcon from '@material-ui/icons/EventNote'
+import { AuthContext } from '../../lib/auth'
 
 const styles = theme => ({
   margin: {
@@ -91,71 +92,60 @@ const theme = createMuiTheme({
   },
 });
 
-class NotificationsComponent extends Component {
+const NotificationsComponent = (props) => {
+  const { user } = useContext(AuthContext)
+  const { notifications, newTime } = useSelector(appState => {
+    return {
+      notifications: appState.notifications
+    }
+  })
 
+  useEffect(() => {
+    getNotifications(user)
+  }, [])
 
-  componentDidMount() {
-    const token = localStorage.getItem("authtoken")
-    const decoded = decode(token)
-    const user_id = decoded.username
-    getNotifications(user_id)
-  }
+  const { classes } = props
 
-
-  render () {
-    return <div>{this.CustomizedButtons(this.props)}</div>
-  }
-  
-  CustomizedButtons(props) {
-    const { classes } = props;
-  
-    return (
+  return (
+    <div>
       <div className="reminders">
         {
-          this.props.notifications.map((item, i) => (
-        <Button
-          variant="contained"
-          color= 'white'
-          className={classNames(classes.margin, classes[item.category])}
-          key = {'key' + i}
-        >
-          { item.category === 'Health' ?
-          <FontAwesomeIcon
-            icon="stethoscope"
-            size="2x"
-          />: item.category === 'Social'?
-          <GroupIcon style={{ fontSize: 50 }}/>
-          : item.category === 'Tasks'?
-          <EventNoteIcon style={{ fontSize: 50 }}/>
-          : item.category === 'Custom'?
-          <FontAwesomeIcon
-            icon="hand-holding-heart"
-            size="2x"
-          />:''
-          }
-          <div className="date-time">
-         <span>{item.message}</span>
-         <span>{moment(Number(item.time)).format('LLL')}</span>
-         </div>
-        </Button>
-          ))
-        }
+        notifications.map((item, i) => (
+          <Button
+            variant="contained"
+            color= 'white'
+            className={classNames(classes.margin, classes[item.category])}
+            key = {'key' + i}
+          >
+            { item.category === 'Health' ?
+              <FontAwesomeIcon
+                icon="stethoscope"
+                size="2x"
+              />: item.category === 'Social'?
+              <GroupIcon style={{ fontSize: 50 }}/>
+              : item.category === 'Tasks'?
+              <EventNoteIcon style={{ fontSize: 50 }}/>
+              : item.category === 'Custom'?
+              <FontAwesomeIcon
+                icon="hand-holding-heart"
+                size="2x"
+              />:''
+            }
+            <div className="date-time">
+              <span>{item.message}</span>
+              <span>{moment(Number(item.time)).format('LLL')}</span>
+            </div>
+          </Button>
+        ))
+      }
       </div>
-    );
-  }
+    </div>
+  )
 }
 
-NotificationsComponent .propTypes = {
+NotificationsComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(appState) {
-  console.log(appState)
-  return {
-     notifications: appState.notifications,
-     newTime: appState.newTime
 
-  }
-}
-
-export default withStyles(styles)(connect(mapStateToProps)(NotificationsComponent));
+export default withStyles(styles)(NotificationsComponent)

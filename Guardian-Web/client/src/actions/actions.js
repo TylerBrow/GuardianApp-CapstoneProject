@@ -8,8 +8,8 @@ export function setNotification(notification) {
 }
 
 export function getNotifications(user_id) {
-    
     axios.get(`/api/notifications/${user_id}` ).then(resp => {
+        if(resp.data.length !== 0){
        let newTime = resp.data.map(item => moment(Number(item.time)).format('LLL'))
         store.dispatch({
             type: 'GET_NOTIFICATIONS',
@@ -17,12 +17,15 @@ export function getNotifications(user_id) {
             newTime: newTime
             
         })
+    }
     })
 }
 
-export function getCoord() {
-    axios.get('/api/maps').then(resp => {
-        console.log(resp.data)
+export function getCoord(user) {
+    axios.get('/api/maps/' + user).then(resp => {
+        
+        const coord = resp.data
+        if(coord.length !== 0 ){
         store.dispatch({
             type: 'GET_COORD',
             all: resp.data,
@@ -30,20 +33,36 @@ export function getCoord() {
             lat: resp.data[resp.data.length - 1].lat,
             lng: resp.data[resp.data.length - 1].lng
         })
+    }
+    else {
+        store.dispatch({
+            type: 'GET_COORD',
+            all: resp.data,
+            center: {lat: 36.023020, lng:  -114.962058},
+            lat: 36.023020,
+            lng:  -114.962058
+        })
+    }
     })
 }
 
+export function getEmergency(lat, lng) {
+    
+    axios.post('/api/emergency/' , {lat,lng})
+}
 
-export function setProfile(profile) {
-    return axios.post('/api/profile', profile)
+export function setProfile(user, name, address, radius) {
+    return axios.post('/api/profile', {user, name, address, radius})
 }
 
 export function getProfile() {
     axios.get('/api/profile').then(resp => {
+        if(resp.data.length !== 0){
         store.dispatch({
             type: 'GET_PROFILE',
             profile: resp.data
         })
+    }
     })
 }
 

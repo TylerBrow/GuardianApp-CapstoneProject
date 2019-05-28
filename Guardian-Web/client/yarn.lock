@@ -8427,10 +8427,10 @@ react-popper@^1.3.3:
     typed-styles "^0.0.7"
     warning "^4.0.2"
 
-react-redux@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.0.2.tgz#34b280a3482aaf60e7d4a504b1295165cbe6b86a"
-  integrity sha512-uKRuMgQt8dWbcz0U75oFK5tDo3boyAKrqvf/j94vpqRFFZfyDDy4kofUgloFIGyuKTq2Zz51zgK9RzOTFXk5ew==
+react-redux@^7.1.0-alpha.5:
+  version "7.1.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0-alpha.5.tgz#762336fd7a941ed5503ee4890e2324ce29ec0488"
+  integrity sha512-bLDaXcNWcoiXKIBz/waf+oImYIBhR8h1YgXo4GKgBEyMJXtMqZkkNqD4w7JNlTsN2Xxo2/1E4akcmAo+wzJAnw==
   dependencies:
     "@babel/runtime" "^7.4.3"
     hoist-non-react-statics "^3.3.0"
@@ -8525,6 +8525,18 @@ react-scripts@3.0.0:
     workbox-webpack-plugin "4.2.0"
   optionalDependencies:
     fsevents "2.0.6"
+
+react-social-icons@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-4.1.0.tgz#d8c1f846783cba15ae0e75704377bc67805f4c20"
+  integrity sha512-wbwSbyS4QWjpL6U+GFZDBrE5Ao8px0QkRgo0XkxDHF2LNRsFNErSDnIPKiowhQ7t7IyrSA2HYrEw7ETgpVTg+Q==
+  dependencies:
+    prop-types "^15.6.2"
+
+react-social-media-bar@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-social-media-bar/-/react-social-media-bar-0.0.4.tgz#a16668445db5ab21f430d4981250d98734e7997d"
+  integrity sha512-1YXmpNJ8tue1qlMyQN7ikI98Ku1IWV6oBAdrstdA12lxj0kApKkYZLE5CyU0DYuz8RCbmfZleCmG26duZRHyPw==
 
 react-transition-group@^2.2.1, react-transition-group@^2.3.1:
   version "2.9.0"

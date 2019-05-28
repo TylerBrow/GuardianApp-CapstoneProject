@@ -1,3 +1,8 @@
+@keyframes floating {
+    0%      {top: 1000px;}
+    100%    {top: 10px;}
+}
+
 .pad {
     width: 40%;
     margin: auto;
@@ -23,5 +28,13 @@
     justify-content: center;
     padding-bottom: 40px;
     font-size: 65px;
-    color: rgb(115, 57, 244, 1);
+    color: rgb(115, 57, 244);
+}
+
+.motto {
+    position: absolute;
+    color: rgb(115, 57, 244);
+    font-size: 30px;
+    animation-name: floating;
+    animation-duration: 2s;
 }

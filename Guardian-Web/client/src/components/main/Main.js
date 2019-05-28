@@ -1,19 +1,10 @@
 import React, {useEffect, useContext, useState, useReducer} from 'react'
 import "./Main.css"
-import Notifications from '../notifications/Notifications'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import Logo from '../logo/Logo'
 import '../logo/Logo.css'
-import SimpleMap from '../GoogleMap'
-import CheckPoint from '../CheckpointMap'
 // import { SnackbarProvider, withSnackbar } from 'notistack';
 import {AuthContext} from '../../lib/auth'
 import {withSnackbar} from 'notistack'
 import axios from 'axios'
-import AddNotifications from '../addNotifications/AddNotifications'
-import Tips from '../tips/Tips'
-import Checkpoints from '../checkpoints/Checkpoints'
-import Profile from '../profile/Profile'
 import moment from 'moment'
 
 
@@ -25,9 +16,9 @@ const Main = (props) => {
 
     const { user } = useContext(AuthContext)    
     
-    // useEffect(() => {
-    //     getAlert()
-    // },[user])
+    useEffect(() => {
+        getAlert()
+    })
    
    let fence = []   
    function getAlert() {
@@ -37,16 +28,19 @@ const Main = (props) => {
         setInterval(
             function getCheckin() {
                 axios.get('/api/checkin/' + user).then(resp => {
+                    if(resp.data.length !== 0){
                      const lastTime = resp.data[resp.data.length - 1]
                      const time = lastTime.timestamp
-                     console.log(time)
+                     
                      let newCheckin = resp.data
                          if (oldCheckin.length !== newCheckin.length) {
                           oldCheckin = newCheckin
                           props.enqueueSnackbar('Checkin on ' + moment(Number(time)).format('LLL'),  {variant: 'success' , anchorOrigin: { vertical:'top', horizontal:'right'}})
                          }
+                        }
                     })
                 }, 10000)
+            }
         setInterval(
             function getGeoFence() {
                 axios.get('/api/geofence/' + user).then(resp => {
@@ -56,25 +50,12 @@ const Main = (props) => {
                             props.enqueueSnackbar('Left Radius', {variant: 'warning', anchorOrigin: {vertical: 'top', horizontal: 'right'}})
                         }
                 })
-            }, 11000)
-        }
+            }, 60000)
     }
 
     return (
         <div>
-            {/* <div className="logo">
-                <Logo />
-            </div>  
-
-            <div className="homepage">   
-                <div className="notificationreminders">
-                    <h1>Notification Reminders</h1>
-                    <Notifications />
-                </div>
-
-                   
-                </div> */}
-            </div>
+        </div>
     )}
 
 export default withSnackbar(Main)

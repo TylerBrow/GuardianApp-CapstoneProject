@@ -11,12 +11,14 @@ import './Login.css'
 import Swal from 'sweetalert2'
 import Footer from '../footer/Footer'
 
+
 const Login = props => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
   const [errorText, setErrorText] = useState("")
   const { signin } = useContext(AuthContext)
+
 
   function sendLogin(e) {
     e.preventDefault()
@@ -33,7 +35,13 @@ const Login = props => {
   }
 
   return (
+    <div>
+      
+    <div className="mottoContainer">
+      <span className="motto">"Guarding those you love..."</span>
+    </div>
     <div className="login">
+      
       <Paper className="pad">
         <div className="loginIcon">
         <span className="name">Guardian</span>
@@ -89,6 +97,7 @@ const Login = props => {
         </form>
       </Paper>
       <Footer />
+    </div>
     </div>
   )
 }

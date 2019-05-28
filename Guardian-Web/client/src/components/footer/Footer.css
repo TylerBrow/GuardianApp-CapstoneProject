@@ -1,11 +1,17 @@
 #footer {
     width: 100%;
-    height: 60vh;
-    background-image: url("https://cdn.caregivingmag.com/wp-content/uploads/2018/02/20114904/About-cell-phone-plans-for-seniors-1.jpg");
-    background-color: rgb(172, 171, 133);
-    background-size: 150vh;
-    background-repeat: no-repeat;
+    color: white;
     padding-left: 80%;
+    margin-top: 5%;
+}
+
+#footer p {
+   padding-left: 3%;
+}
+
+#footer a {
+    padding-left: 7%;
+    color: rgb(115, 57, 244);
 }
 
 
