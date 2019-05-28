@@ -15,7 +15,7 @@ const styles = theme => ({
     height: 40,
     fontWeight: 'bold',
     "&:hover": {
-      backgroundColor: "#fff",
+      backgroundColor: "white",
       color: 'rgb(115,57,244)'
     }
   },

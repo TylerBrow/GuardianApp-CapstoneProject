@@ -48,7 +48,18 @@ export function getCoord(user) {
 
 export function getEmergency(lat, lng) {
 
-    axios.post('/api/emergency', {lat,lng})
+    axios.get(`/api/emergency/${lat}/${lng}` ).then( resp => {
+        const info = resp.data
+        const emergencyInfo = info.results.map(item  => {
+            return {
+            location: item.geometry.location,
+            name: item.name
+            }})
+       store.dispatch ({
+           type: 'GET_EMERGENCY',
+           payload: emergencyInfo
+       })
+    })
 }
 
 export function setProfile(user, name, address, radius) {
@@ -63,22 +74,5 @@ export function getProfile() {
             profile: resp.data
         })
     }
-    })
-}
-
-export function grabData() {
-    axios.get('/api/sentdata').then(resp =>{
-        console.log(resp.data)
-        const info = resp.data
-        const emergencyInfo = info.results.map(item  => {
-            return {
-            location: item.geometry.location,
-            name: item.name
-            }})
-        console.log(emergencyInfo)
-       store.dispatch ({
-           type: 'GET_EMERGENCY',
-           payload: emergencyInfo
-       })
     })
 }

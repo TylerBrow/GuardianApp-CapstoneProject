@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { useSelector } from 'react-redux'
-import {getCoord, getEmergency, grabData} from '../actions/actions'
+import {getCoord, getEmergency} from '../actions/actions'
 import Logo from './logo/Logo' 
 import Notifications from './notifications/Notifications'
 import {AuthContext} from '../lib/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom'
 
 
 const SampleMarker = ({text}) => <div className="main-marker"><div className="icon-marker"><FontAwesomeIcon icon='map-marker' color="rgb(115, 57, 244, 1)" size='3x' /></div><p className="g-logo">{text}</p></div>
@@ -31,19 +30,10 @@ const SimpleMap = (props) => {
 
   useEffect(() => {
     getCoord(user)
-    if (lat !== 0) {
+    if(lat !== 0){
     getEmergency(lat, lng)
     }
-    grabData()
-  }, [lat])
-
-  // function reloadData (e){
-  //   if (lat !== 0) {
-  //     getEmergency(lat, lng)
-  //     }
-  //     grabData()
-  //   e.preventDefault()
-  // }
+  }, [lat, lng, user])
 
   return (
     <div>
@@ -60,9 +50,7 @@ const SimpleMap = (props) => {
             <div  style={{ height: '100%', width: '100%'}}>
               <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCgWMGQHXjO5_ddzGWfEMq40c3i7oQQI38' }}
-                // defaultCenter={props.center}
                 center={newCenter} 
-                // defaultZoom={props.zoom}
                 zoom={17}
                 yesIWantToUseGoogleMapApiInternals
               >
@@ -74,10 +62,9 @@ const SimpleMap = (props) => {
                 />
 
                 {
-                  emergency.map(item => {
-                    // console.log(item.location.lat, item.location.lng)
-                    
+                  emergency.map((item,i) => {
                     return <EmergencyMarker
+                      key = {'key-' + i}
                       lat = {item.location.lat}
                       lng = {item.location.lng}
                       text1 = {item.name}
@@ -93,14 +80,6 @@ const SimpleMap = (props) => {
       </div>
     </div>
   )
-}
-
-SimpleMap.defaultProps = {
-  center: {
-    lat: 36.158638,
-    lng: -115.152512
-  },
-  zoom: 11
 }
 
 export default SimpleMap

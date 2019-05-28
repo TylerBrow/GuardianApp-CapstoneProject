@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import pink from '@material-ui/core/colors/pink';
@@ -10,8 +10,6 @@ import blue from '@material-ui/core/colors/blue';
 import orange from '@material-ui/core/colors/orange';
 import './Notifications.css'
 import {getNotifications} from '../../actions/actions';
-import { getUserID } from '../../lib/auth';
-import { decode } from "jsonwebtoken"
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GroupIcon from '@material-ui/icons/Group'
@@ -82,19 +80,19 @@ const styles = theme => ({
 
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
-    color: green[500],
-  },
-  typography: {
-    useNextVariants: true,
-  },
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: green,
+//     color: green[500],
+//   },
+//   typography: {
+//     useNextVariants: true,
+//   },
+// });
 
 const NotificationsComponent = (props) => {
   const { user } = useContext(AuthContext)
-  const { notifications, newTime } = useSelector(appState => {
+  const { notifications } = useSelector(appState => {
     return {
       notifications: appState.notifications
     }
@@ -102,7 +100,7 @@ const NotificationsComponent = (props) => {
 
   useEffect(() => {
     getNotifications(user)
-  }, [])
+  }, [user])
 
   const { classes } = props
 
