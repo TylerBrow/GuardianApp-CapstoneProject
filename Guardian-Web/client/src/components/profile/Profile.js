@@ -50,13 +50,13 @@ const Profile = (props) => {
                                 <fieldset className="fieldset">
                                     <label>Loved One's Address</label><br></br>
                                     <input type="text" name="street" placeholder="Street Address" maxLength="30" onChange={e => setStreet(e.target.value)} />
-                                    {/* <input type="text" name="apt" placeholder="APT" onChange={e => setApt(e.target.value)} /> */}
                                     <input type="text" name="city" placeholder="City" onChange={e => setCity(e.target.value)} />
                                     <input type="text" name="state" placeholder="State" onChange={e => setSt(e.target.value)} />
                                     <input type="text" name="zip" placeholder="Zip Code" onChange={e => setZip(e.target.value)} />
                                 </fieldset>
                                 <label className="select">Select a Radius Boundary</label>
                                 <select className="selectoption" onChange={e => setRadius(e.target.value)}>
+                                    <option>Choose Radius</option>
                                     <option value='1000000'>OFF</option>
                                     <option value='25'>25m</option>
                                     <option value='50'>50m</option>

@@ -10,7 +10,6 @@
 #tipsmain h2 {
     color: rgb(154, 121, 250);
     font-weight: bolder;
-
     font-size: 27px;
     text-align: left;
 }
@@ -27,15 +26,10 @@
     flex-direction: column;
     width: 90%;
     background: white;
-
-    
     margin: auto;
     border-radius: 5px;
     height: 35vh;
-
     padding: 0px 20px;
-    
-
     overflow: scroll;
 }
 

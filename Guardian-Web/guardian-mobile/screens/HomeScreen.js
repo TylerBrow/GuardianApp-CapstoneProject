@@ -76,8 +76,8 @@ import {
           })
         })
       })
-      // console.log('lat', this.state.latitude, 'lng', this.state.longitude)
-      // console.log(this.props.radius)
+      console.log('lat', this.state.latitude, 'lng', this.state.longitude)
+      console.log(this.props.radius)
       await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
     }
 
