@@ -57,6 +57,7 @@ import {
       this._getLocationAsync()
       this.load()
       this.gettingUser()
+      console.log(this.props.notifications)
     }
 
     componentWillMount(){
@@ -65,6 +66,7 @@ import {
 
     componentWillReceiveProps(){
       this.geo()
+      console.log(this.props.notifications)
     }
     
     geo = async () => {
@@ -76,8 +78,8 @@ import {
           })
         })
       })
-      console.log('lat', this.state.latitude, 'lng', this.state.longitude)
-      console.log(this.props.radius)
+      // console.log('lat', this.state.latitude, 'lng', this.state.longitude)
+      // console.log(this.props.radius)
       await Location.startGeofencingAsync('geofence', [{latitude: this.state.latitude, longitude: this.state.longitude, radius: this.props.radius, notifyOnExit: true}])
     }
 
@@ -250,6 +252,7 @@ TaskManager.defineTask('currentLoc', ({ data, error }) => {
       let user = ''
       try {
         user = await AsyncStorage.getItem('user')
+        console.log(user)
         getNotifications(user)
         getUserLocation(locations, user)
         getGeofence(user)

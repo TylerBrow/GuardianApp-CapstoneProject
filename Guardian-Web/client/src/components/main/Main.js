@@ -17,7 +17,7 @@ const Main = (props) => {
     
     useEffect(() => {
         getAlert()
-    }, [])
+    }, [user])
      
    function getAlert() {
     let oldCheckin = []
