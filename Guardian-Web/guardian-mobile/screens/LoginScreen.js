@@ -34,7 +34,7 @@ class LoginScreen extends React.Component{
   handleButtonPress = () => {
 
 
-    axios.get('http://10.68.0.117:3001/api/getuser/' + this.state.username).then(resp => {
+    axios.get('http://192.168.0.25:3001/api/getuser/' + this.state.username).then(resp => {
 
       if(resp.data != ''){
         getNotifications(this.state.username)

@@ -1,6 +1,7 @@
 import store from '../store'
 import axios from 'axios'
 import moment from 'moment'
+import DefaultCoords from '../DefaultCoords'
 
 
 export function setNotification(notification) {
@@ -23,7 +24,6 @@ export function getNotifications(user_id) {
 
 export function getCoord(user) {
     axios.get('/api/maps/' + user).then(resp => {
-        
         const coord = resp.data
         if(coord.length !== 0 ){
         store.dispatch({
@@ -38,9 +38,9 @@ export function getCoord(user) {
         store.dispatch({
             type: 'GET_COORD',
             all: resp.data,
-            center: {lat: 36.023020, lng:  -114.962058},
-            lat: 36.023020,
-            lng:  -114.962058
+            center: DefaultCoords().center,
+            lat: DefaultCoords().lat,
+            lng:  DefaultCoords().lng
         })
     }
     })

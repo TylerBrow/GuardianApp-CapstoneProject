@@ -14,7 +14,6 @@ const Profile = (props) => {
 
     const [name, setName] = useState('')
     const [street, setStreet] = useState('')
-    // const [apt, setApt] = useState('')
     const [city, setCity] = useState('')
     const [st, setSt] = useState('')
     const [zip, setZip] = useState('')
