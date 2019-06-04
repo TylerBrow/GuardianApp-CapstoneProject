@@ -1,7 +1,8 @@
 import store from '../store'
 import axios from 'axios'
 import moment from 'moment'
-import DefaultCoords from '../DefaultCoords'
+// import DefaultCoords from '../DefaultCoords'
+import { lat, lng, center } from '../DefaultCoords'
 
 
 export function setNotification(notification) {
@@ -38,10 +39,11 @@ export function getCoord(user) {
         store.dispatch({
             type: 'GET_COORD',
             all: resp.data,
-            center: DefaultCoords().center,
-            lat: DefaultCoords().lat,
-            lng:  DefaultCoords().lng
+            center, //imported center
+            lat, //imported lat
+            lng //imported lng
         })
+        console.log('imported values', lat, lng, center)
     }
     })
 }
