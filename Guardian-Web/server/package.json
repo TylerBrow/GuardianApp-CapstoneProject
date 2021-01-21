@@ -21,6 +21,6 @@
     "mysql": "^2.17.1",
     "nodemon": "^1.18.11",
     "react-hotkeys": "^1.1.4",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   }
 }
